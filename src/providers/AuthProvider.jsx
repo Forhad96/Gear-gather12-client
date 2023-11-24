@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/axios/useAxiosPublic";
+import PropTypes from "prop-types";
 
 export const AuthContext = createContext(null);
 
@@ -85,6 +86,10 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node,
 };
 
 export default AuthProvider;
