@@ -1,0 +1,4 @@
+-create login page and routes-
+-todo:create register user page and routes-
+-todo:instal firebase and set api key-
+-todo: create authProvider for authentication-

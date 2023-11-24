@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import ThemeController from "./ThemeController";
 
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import NavAvatar from "./NavAvatar";
 const axiosPublic = axios.create({
   baseURL: "https://bookify-eight.vercel.app",
 });
@@ -48,9 +49,10 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end gap-5">
         <ThemeController></ThemeController>
-        <a className="btn">Register/Login</a>
+        <NavAvatar></NavAvatar>
+        <Link to='/login' className="btn">Register/Login</Link>
       </div>
     </div>
   );
@@ -60,13 +62,16 @@ export default Navbar;
 const links = (
   <>
     <li>
-      <NavLink to='/home'>Home</NavLink>
+      <NavLink to='/'>Home</NavLink>
     </li>
     <li>
       <NavLink to='/products'>Products</NavLink>
     </li>
     <li>
-      <NavLink to='/Contact'>Contact</NavLink>
+      <NavLink to='/contact'>Contact</NavLink>
+    </li>
+    <li>
+      <NavLink to='/dashboard'>Dashboard</NavLink>
     </li>
 
   </>
