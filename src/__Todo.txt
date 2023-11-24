@@ -4,4 +4,8 @@
 -create axis instance for public and secure api_
 -create authProvider for authentication-
 -install prop types for prop validation-
--todo: user login,register with firebase,
+-todo:create hooks using image bb api for uploading image
+-user register with firebase-
+-todo:user login,register with firebase-
+-todo:save user into to database-
+-todo:

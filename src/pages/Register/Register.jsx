@@ -1,12 +1,29 @@
 import { Link } from "react-router-dom";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import Logo from "../../shared/Logo/Logo";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
-    console.log(import.meta.env.VITE_APIKEY);
-  const handleRegister = (e) => {
-    e.preventDefault();
+  const { createUser,updateUserProfile} = useAuth();
+
+  // handle for register
+  const handleRegister = async (e) => {
+    try {
+      e.preventDefault();
+      const allInputData = new FormData(e.target);
+      const { name, email, password, photo } = Object.fromEntries(allInputData);
+
+      // create user function
+     const result = await createUser(email, password);
+     console.log(result.user);
+     await updateUserProfile(name,photo)
+     alert('user logged in successful')
+
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600 space-y-5">
@@ -18,7 +35,7 @@ const Register = () => {
             </h3>
           </div>
         </div>
-        <form onSubmit={() => handleRegister} className="space-y-5">
+        <form onSubmit={handleRegister} className="space-y-5">
           <div>
             <label className="font-medium">Name</label>
             <input
