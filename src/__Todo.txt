@@ -1,4 +1,6 @@
 -create login page and routes-
 -create register user page and routes-
--todo:instal firebase and set api key-
+-install firebase and set api key-
+-todo: create axis instance for public and secure api 
 -todo: create authProvider for authentication-
+-todo: user login,register with firebase,

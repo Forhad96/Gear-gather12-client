@@ -3,6 +3,7 @@ import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import Logo from "../../shared/Logo/Logo";
 
 const Register = () => {
+    console.log(import.meta.env.VITE_APIKEY);
   const handleRegister = (e) => {
     e.preventDefault();
   };
