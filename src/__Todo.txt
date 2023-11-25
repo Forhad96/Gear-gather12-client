@@ -8,5 +8,5 @@
 -*register user email password validation and loading toast
 -create hooks using image bb api for uploading image
 -user login firebase-
--todo:save user into to database-
+-save user data into to database-
 -todo:

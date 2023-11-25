@@ -2,16 +2,18 @@ import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import Logo from "../../shared/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
-// import useAxiosPublic from "../../hooks/axiosPublicApi/useAxiosPublic";
+import useAxiosPublic from "../../hooks/axiosPublicApi/useAxiosPublic";
 import imageUpload from "../../utils/imageUpload";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import usePostDataPublic from "../../hooks/axiosPublicApi/usePostDataPublic";
 
 const Register = () => {
   const { user, createUser, updateUserProfile } = useAuth();
   const [error,setError] = useState()
+  const {postData} = usePostDataPublic()
     const goTo = useNavigate();
-  // const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
   console.log(user);
 
   // handle for register
@@ -28,14 +30,21 @@ const Register = () => {
         const createResult = await createUser(email, password);
         console.log(createResult.user);
 
-       const updateResult = await updateUserProfile(name, imageUploadResponse);
-       if(updateResult){
-        toast.success("Account created successful");
-        goTo('/')
-       }
-        // i want to react hot tost promise here when user create successful
+await updateUserProfile(name, imageUploadResponse);
+        // save user data to database
+        const user = {
+          name,
+          email,
+        };
+        const postRes = await axiosPublic.post("/users", user);
+        // const postRes =  await postData('/users',user)
+        console.log("Post res", postRes);
 
+        toast.success("Account created successful");
+        goTo("/");
       }
+      // i want to react hot tost promise here when user create successful
+      
     } catch (error) {
       console.log(error);
     }
