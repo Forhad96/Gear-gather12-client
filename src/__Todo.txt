@@ -10,5 +10,6 @@
 -user login firebase-
 -save user data into to database-
 -user logout functionality-
--todo:
+-todo: jwt implementation-
+-google singIn
 -todo: display users data-

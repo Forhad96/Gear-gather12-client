@@ -1,8 +1,8 @@
 const Loader = () => {
-    return (
-        <div>
-            <p>HELLO I am Loader</p>
-        </div>
-    );
+  return (
+    <div>
+      <span className="loading loading-spinner text-info"></span>
+    </div>
+  );
 };
 export default Loader;

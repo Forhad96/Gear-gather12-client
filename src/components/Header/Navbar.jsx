@@ -5,6 +5,7 @@ import ThemeController from "./ThemeController";
 import { Link, NavLink } from "react-router-dom";
 import NavAvatar from "./NavAvatar";
 import useAuth from "../../hooks/useAuth";
+import Loader from "../../shared/Loader/Loader";
 const axiosPublic = axios.create({
   baseURL: "https://bookify-eight.vercel.app",
 });
@@ -18,7 +19,9 @@ const Navbar = () => {
     },
   });
   console.log(data);
-
+// if(loading){
+//   return <Loader></Loader>
+// }
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -53,7 +56,9 @@ const Navbar = () => {
       </div>
       <div className="navbar-end gap-5">
         <ThemeController></ThemeController>
+
         {
+          
           user?.email?
           <NavAvatar></NavAvatar>:
         <Link to='/login' className="btn">Register/Login</Link>
