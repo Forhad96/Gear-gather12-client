@@ -9,6 +9,7 @@ import DashboardHome from "../pages/Dashboard/Dashboard/DashboardHome";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
 const route = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const route = createBrowserRouter([
       {
         path:'profile',
         element:<Profile></Profile>
+      },
+      {
+        path:'allUsers',
+        element:<AllUsers></AllUsers>,
       }
     ]
   },

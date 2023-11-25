@@ -13,7 +13,6 @@ import app from "../config/firebase.config";
 import PropTypes from "prop-types";
 import useAxiosPublic from "../hooks/axiosPublicApi/useAxiosPublic";
 
-
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
@@ -52,8 +51,20 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      try {
+        const userEmail = currentUser?.email || user?.email
+        const loggedUser = {email:userEmail}
+        setUser(currentUser);
+        if (currentUser) {
+          const res = await axiosPublic.post('/jwt',loggedUser)
+          console.log('token response',res.data);
+
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
       // if (currentUser) {
       //   // get token and store client
       //   const userInfo = { email: currentUser.email };
@@ -72,7 +83,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       return unsubscribe();
     };
-  }, [axiosPublic]);
+  }, [axiosPublic,user]);
 
   const authInfo = {
     user,

@@ -1,4 +1,16 @@
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 const NavAvatar = () => {
+const {logOut} = useAuth()
+  const handleLogout =async()=>{
+try {
+ await logOut()
+toast.success('Logout successful')
+} catch (error) {
+  console.log(error);
+  toast.error(error.message)
+}
+  }
     return (
       <div className="dropdown dropdown-end">
         <div tabIndex={0} className="avatar">
@@ -15,6 +27,9 @@ const NavAvatar = () => {
           </li>
           <li>
             <a>Dashboard</a>
+          </li>
+          <li>
+            <a onClick={handleLogout}>Logout</a>
           </li>
         </ul>
       </div>

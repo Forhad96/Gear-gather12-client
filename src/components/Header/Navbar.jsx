@@ -4,10 +4,12 @@ import ThemeController from "./ThemeController";
 
 import { Link, NavLink } from "react-router-dom";
 import NavAvatar from "./NavAvatar";
+import useAuth from "../../hooks/useAuth";
 const axiosPublic = axios.create({
   baseURL: "https://bookify-eight.vercel.app",
 });
 const Navbar = () => {
+  const {user,loading} = useAuth()
   const { data } = useQuery({
     queryKey: ["bookings"],
     queryFn: async () => {
@@ -51,8 +53,11 @@ const Navbar = () => {
       </div>
       <div className="navbar-end gap-5">
         <ThemeController></ThemeController>
-        <NavAvatar></NavAvatar>
+        {
+          user?.email?
+          <NavAvatar></NavAvatar>:
         <Link to='/login' className="btn">Register/Login</Link>
+        }
       </div>
     </div>
   );

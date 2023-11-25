@@ -9,4 +9,6 @@
 -create hooks using image bb api for uploading image
 -user login firebase-
 -save user data into to database-
+-user logout functionality-
 -todo:
+-todo: display users data-
