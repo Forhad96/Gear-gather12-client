@@ -2,9 +2,14 @@ import { Link } from "react-router-dom";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import Logo from "../../shared/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/axiosPublicApi/useAxiosPublic";
+import imageUpload from "../../utils/imageUpload";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createUser,updateUserProfile} = useAuth();
+  const {user, createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  console.log(user);
 
   // handle for register
   const handleRegister = async (e) => {
@@ -13,11 +18,22 @@ const Register = () => {
       const allInputData = new FormData(e.target);
       const { name, email, password, photo } = Object.fromEntries(allInputData);
 
-      // create user function
-     const result = await createUser(email, password);
-     console.log(result.user);
-     await updateUserProfile(name,photo)
-     alert('user logged in successful')
+      const imageUploadResponse = await imageUpload(photo);
+
+
+
+      
+      if(imageUploadResponse){
+        // create user function
+        const result = await createUser(email, password);
+        console.log(result.user);
+
+        await updateUserProfile(name, imageUploadResponse);
+        // i want to react hot tost promise here when user create successful
+        toast.success('Account created successful')
+
+      }
+
 
     } catch (error) {
       console.log(error);
@@ -66,7 +82,7 @@ const Register = () => {
           <div>
             <label className="font-medium">Photo Url</label>
             <input
-              type="text"
+              type="file"
               name="photo"
               required
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"

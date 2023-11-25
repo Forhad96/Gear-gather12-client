@@ -5,7 +5,7 @@ function validatePassword(password) {
   const uppercaseRegex = /[A-Z]/;
   const lowercaseRegex = /[a-z]/;
   const digitRegex = /\d/;
-  const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+  const specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/;
 
   // Check each requirement
   const isLengthValid = password.length >= minLength;
