@@ -5,7 +5,8 @@
 -create authProvider for authentication-
 -install prop types for prop validation-
 -register user using firebase-
--todo:create hooks using image bb api for uploading image
--todo:user login with firebase-
+-*register user email password validation and loading toast
+-create hooks using image bb api for uploading image
+-user login firebase-
 -todo:save user into to database-
 -todo:
