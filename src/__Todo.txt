@@ -11,6 +11,7 @@
 -save user data into to database-
 -user logout functionality-
 -google singIn
-- jwt implementation-
--todo: 
+-jwt implementation-
+-create api for get users data
+-get user data form data base
 -todo: display users data-

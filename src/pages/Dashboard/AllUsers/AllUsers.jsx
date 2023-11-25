@@ -1,4 +1,24 @@
+import {useQuery} from '@tanstack/react-query'
+import useAxiosPublic from '../../../hooks/axiosPublicApi/useAxiosPublic';
+import useGetSecure from '../../../hooks/axiosSecureApi/useGetSecure';
+import useAxiosSecure from '../../../hooks/axiosSecureApi/useAxiosSecure';
 const AllUsers = () => {
+  // const axiosPublic = useAxiosPublic()
+//   const axiosSecure = useAxiosSecure()
+// const {data} = useQuery({
+//   queryKey:['users'],
+//   queryFn: async () =>{
+//     const res = await axiosSecure.get('/users')
+//     return res.data
+//   }
+
+// })
+// console.log(data);
+const {data} = useGetSecure('/users','users')
+console.log(data);
+
+// console.log(data);
+
     // const 
     return (
       <div className="overflow-x-auto">
