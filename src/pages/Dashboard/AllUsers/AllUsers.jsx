@@ -14,8 +14,8 @@ const AllUsers = () => {
 
 // })
 // console.log(data);
-const {data} = useGetSecure('/users','users')
-console.log(data);
+const {data:users} = useGetSecure('/users','users')
+
 
 // console.log(data);
 
@@ -34,16 +34,15 @@ console.log(data);
             </tr>
           </thead>
           <tbody>
-            {
-
-            }
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Blue</td>
-            </tr>
-            
+            {users?.map((user, idx) => (
+              <tr key={user._id}>
+                <th>{idx + 1}</th>
+                <td>{user?.name}</td>
+                <td>{user?.email}</td>
+                <td>{user?.role}</td>
+                <td>delete</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

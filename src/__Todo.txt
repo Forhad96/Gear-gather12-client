@@ -14,4 +14,4 @@
 -jwt implementation-
 -create api for get users data
 -get user data form data base
--todo: display users data-
+-display users data-
