@@ -1,32 +1,48 @@
-
 import { useState } from "react";
 import TagInput from "./TagInput";
 import useAuth from "../../../hooks/useAuth";
-// import TagInput from "./TagInput";
-
+import imageUpload from "../../../utils/imageUpload.js";
+import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure.jsx";
 
 const AddProduct = () => {
-  const {user} =  useAuth()
-const [tags, setTags] = useState([]);
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const [tags, setTags] = useState([]);
 
-  const handleSubmit = (e) => {
-    //   const [tags, setTags] = useState([]);
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const allInputData = new FormData(e.target);
+      const {
+        name,
+        image_url,
+        price,
+        description,
+        product_owner,
+        category,
+        externalLinks,
+      } = Object.fromEntries(allInputData);
+      const imageUploadResponse = await imageUpload(image_url);
+      if(imageUploadResponse){
+        const product = {
+          name,
+          image_url: imageUploadResponse,
+          price,
+          description,
+          product_owner: user?.email,
+          category,
+          tags,
+          externalLinks,
+        };
 
-    // Validate the form fields here if needed
+        const res = await axiosSecure.post('/products',product)
+        console.log(res.data);
+        console.log(product);
+      }
 
-    // Create the product object
-    const product = {
-      productName,
-      productImage,
-      description,
-      ownerInfo,
-      tags,
-      externalLinks,
-    };
-
-    // // Pass the product object to the onSubmit callback
-    // onSubmit(product);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -69,7 +85,7 @@ const [tags, setTags] = useState([]);
             Product Image <span className="text-red-500">*</span>
           </label>
           <input
-            type="text"
+            type="file"
             name="image_url"
             required
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
@@ -83,8 +99,22 @@ const [tags, setTags] = useState([]);
             Product price <span className="text-red-500">*</span>
           </label>
           <input
-            type="text"
+            type="number"
             name="price"
+            required
+            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="productImage"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Product Category <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="category"
             required
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
