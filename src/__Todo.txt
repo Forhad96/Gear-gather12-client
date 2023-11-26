@@ -15,3 +15,6 @@
 -create api for get users data
 -get user data form data base
 -display users data-
+-create api for update user role
+-make user user admin or moderator role
+

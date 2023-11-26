@@ -2,24 +2,26 @@ import {useQuery} from '@tanstack/react-query'
 import useAxiosPublic from '../../../hooks/axiosPublicApi/useAxiosPublic';
 import useGetSecure from '../../../hooks/axiosSecureApi/useGetSecure';
 import useAxiosSecure from '../../../hooks/axiosSecureApi/useAxiosSecure';
+import toast from 'react-hot-toast'
 const AllUsers = () => {
-  // const axiosPublic = useAxiosPublic()
-//   const axiosSecure = useAxiosSecure()
-// const {data} = useQuery({
-//   queryKey:['users'],
-//   queryFn: async () =>{
-//     const res = await axiosSecure.get('/users')
-//     return res.data
-//   }
-
-// })
-// console.log(data);
-const {data:users} = useGetSecure('/users','users')
+const axiosSecure = useAxiosSecure()
+const {data:users,refetch} = useGetSecure('/users','users') //this hook get data endpoints,query key
 
 
-// console.log(data);
 
-    // const 
+    const handleRoleUpdate = async (id,role)=>{
+      console.log(id,role);
+      try {
+        const res = await axiosSecure.put(`/users/${id}`,{"role":role})
+        if(res.data.modifiedCount > 0){
+          toast.success('user role update successful')
+          refetch()
+        }
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
     return (
       <div className="overflow-x-auto">
         <table className="table">
@@ -30,7 +32,7 @@ const {data:users} = useGetSecure('/users','users')
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
-              <th>Action</th>
+              <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -40,7 +42,20 @@ const {data:users} = useGetSecure('/users','users')
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
                 <td>{user?.role}</td>
-                <td>delete</td>
+                <td className="text-center">
+                  <button
+                    onClick={() => handleRoleUpdate(user._id, "admin")}
+                    className="btn btn-sm"
+                  >
+                    Make Admin
+                  </button>
+                  <button
+                    onClick={() => handleRoleUpdate(user._id, "moderator")}
+                    className="btn btn-sm ml-2"
+                  >
+                    Make Moderator
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
