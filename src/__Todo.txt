@@ -25,6 +25,7 @@
 -create middleware  for verify admin
 -create api for product details
 -view user own single product 
--todo:edit user own product
+-create api for edit product
+-edit user own product
 -todo:delete user own product
 

@@ -1,16 +1,29 @@
-import { useState } from "react";
-
-
+import { useEffect, useState } from "react";
 
 import TagInput from "../../pages/Dashboard/AddProduct/TagInput.jsx";
 import useAuth from "../../hooks/useAuth.jsx";
 import imageUpload from "../../utils/imageUpload.js";
 import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure.jsx";
+import useGetSecure from "../../hooks/axiosSecureApi/useGetSecure.jsx";
+import { useParams } from "react-router-dom";
+import Loader from "../Loader/Loader.jsx";
+import toast from "react-hot-toast";
 
 const EditProduct = ({data}) => {
+  const {id} = useParams()
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [tags, setTags] = useState([]);
+  const {data:product,isLoading} = useGetSecure(`/products/${id}`,'product')
+useEffect(() => {
+  // Set default tags when the component mounts
+  if (product?.tags) {
+    setTags([...product.tags]);
+  }
+}, [product]);
+if(isLoading){
+  return <Loader></Loader>
+}
 
   const handleSubmit = async (e) => {
     try {
@@ -26,8 +39,8 @@ const EditProduct = ({data}) => {
         externalLinks,
       } = Object.fromEntries(allInputData);
       const imageUploadResponse = await imageUpload(image_url);
-      if (imageUploadResponse) {
-        const product = {
+// update product
+        const UpdateProduct = {
           name,
           image_url: imageUploadResponse,
           price,
@@ -38,10 +51,14 @@ const EditProduct = ({data}) => {
           externalLinks,
         };
 
-        const res = await axiosSecure.post("/products", product);
-        console.log(res.data);
-        console.log(product);
-      }
+        const res = await axiosSecure.patch(
+          `/products/${product?._id}`,
+          UpdateProduct
+        );
+        console.log(res);
+        toast.success('update successful')
+        console.log(UpdateProduct);
+      
     } catch (error) {
       console.log(error);
     }
@@ -75,6 +92,7 @@ const EditProduct = ({data}) => {
             type="text"
             name="name"
             required
+            defaultValue={product?.name}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
@@ -89,7 +107,7 @@ const EditProduct = ({data}) => {
           <input
             type="file"
             name="image_url"
-            required
+            // defaultValue={product?.image_url}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
@@ -103,7 +121,8 @@ const EditProduct = ({data}) => {
           <input
             type="number"
             name="price"
-            required
+            defaultValue={product?.price}
+      
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
@@ -117,7 +136,8 @@ const EditProduct = ({data}) => {
           <input
             type="text"
             name="category"
-            required
+            defaultValue={product?.category}
+     
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
@@ -131,7 +151,8 @@ const EditProduct = ({data}) => {
           </label>
           <textarea
             name="description"
-            required
+            defaultValue={product?.description}
+     
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
@@ -143,7 +164,11 @@ const EditProduct = ({data}) => {
           >
             Tags
           </label>
-          <TagInput tags={tags} setTags={setTags}></TagInput>
+          <TagInput
+            tags={tags}
+            defaultTags={product?.tags}
+            setTags={setTags}
+          ></TagInput>
         </div>
         <div className="mb-4">
           <label
@@ -156,6 +181,7 @@ const EditProduct = ({data}) => {
             type="text"
             id="externalLinks"
             name="externalLinks"
+            defaultValue={product?.externalLinks}
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>

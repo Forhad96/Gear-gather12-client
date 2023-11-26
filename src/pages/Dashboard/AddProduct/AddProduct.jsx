@@ -3,6 +3,7 @@ import TagInput from "./TagInput";
 import useAuth from "../../../hooks/useAuth";
 import imageUpload from "../../../utils/imageUpload.js";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure.jsx";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const { user } = useAuth();
@@ -36,6 +37,7 @@ const AddProduct = () => {
         };
 
         const res = await axiosSecure.post('/products',product)
+        toast.success("Product added successful");
         console.log(res.data);
         console.log(product);
       }

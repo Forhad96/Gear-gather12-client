@@ -82,10 +82,10 @@ const route = createBrowserRouter([
         path: "productDetails/:id",
         element: <ProductDetails></ProductDetails>,
       },
-      // {
-      //   path:'editProduct/:id',
-      //   element:<EditProduct></EditProduct>
-      // }
+      {
+        path:'editProduct/:id',
+        element:<EditProduct></EditProduct>
+      }
     ],
   },
 ]);
