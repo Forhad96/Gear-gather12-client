@@ -11,14 +11,14 @@ const axiosPublic = axios.create({
 });
 const Navbar = () => {
   const {user,loading} = useAuth()
-  const { data } = useQuery({
-    queryKey: ["bookings"],
-    queryFn: async () => {
-      const res = await axiosPublic.get("/rooms");
-      return res.data;
-    },
-  });
-  console.log(data);
+  // const { data } = useQuery({
+  //   queryKey: ["bookings"],
+  //   queryFn: async () => {
+  //     const res = await axiosPublic.get("/rooms");
+  //     return res.data;
+  //   },
+  // });
+  // console.log(data);
 // if(loading){
 //   return <Loader></Loader>
 // }

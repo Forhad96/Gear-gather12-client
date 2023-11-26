@@ -17,4 +17,7 @@
 -display users data-
 -create api for update user role
 -make user user admin or moderator role
+-create routes for user add product and manage product
+-todo:crete add product form
+-todo:create api for add product
 

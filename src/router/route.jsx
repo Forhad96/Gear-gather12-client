@@ -10,6 +10,8 @@ import Profile from "../pages/Dashboard/Profile/Profile";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
+import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 
 const route = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ const route = createBrowserRouter([
       {
         path:'allUsers',
         element:<AllUsers></AllUsers>,
+      },
+      {
+        path:'addProduct',
+        element:<AddProduct></AddProduct>
+      },
+      {
+        path:'manageProducts',
+        element:<ManageProducts></ManageProducts>
       }
     ]
   },
