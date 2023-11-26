@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useGetSecure = (endpoint,key) => {
+const useGetSecure = (endpoint, key) => {
   const axiosSecure = useAxiosSecure();
   const res = useQuery({
     queryKey: [key],
@@ -10,6 +10,6 @@ const useGetSecure = (endpoint,key) => {
       return res.data;
     },
   });
-    return res;
+  return res;
 };
 export default useGetSecure;

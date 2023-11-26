@@ -12,6 +12,7 @@ import Register from "../pages/Register/Register";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
+import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 
 const route = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const route = createBrowserRouter([
       {
         path:'manageProducts',
         element:<ManageProducts></ManageProducts>
+      },
+      {
+        path:'myProducts',
+        element:<MyProducts></MyProducts>
       }
     ]
   },

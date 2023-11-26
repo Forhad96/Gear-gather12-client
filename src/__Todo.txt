@@ -19,5 +19,10 @@
 -make user user admin or moderator role
 -create routes for user add product and manage product
 -crete add product form
--todo:create api for add product
+-create api for add product
+-create api for user specific products
+- display user added product
+-todo:view user own single product 
+-todo:edit user own product
+-todo:delete user own product
 
