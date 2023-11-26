@@ -13,6 +13,9 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
+import ProductDetails from "../shared/ProductDetails/ProductDetails";
+import EditProduct from "../shared/EditProduct/EditProduct";
+import PrivateRoute from "./PrivateRoute";
 
 const route = createBrowserRouter([
   {
@@ -33,45 +36,57 @@ const route = createBrowserRouter([
         element: <Contact></Contact>,
       },
       {
-        path:'/login',
-        element:<Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path:'/register',
-        element:<Register></Register>
-      }
+        path: "/register",
+        element: <Register></Register>,
+      },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
-    errorElement:<Error></Error>,
-    children:[
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    errorElement: <Error></Error>,
+    children: [
       {
-        index:true,
-        element:<DashboardHome></DashboardHome>
+        index: true,
+        element: <DashboardHome></DashboardHome>,
       },
       {
-        path:'profile',
-        element:<Profile></Profile>
+        path: "profile",
+        element: <Profile></Profile>,
       },
       {
-        path:'allUsers',
-        element:<AllUsers></AllUsers>,
+        path: "allUsers",
+        element: <AllUsers></AllUsers>,
       },
       {
-        path:'addProduct',
-        element:<AddProduct></AddProduct>
+        path: "addProduct",
+        element: <AddProduct></AddProduct>,
       },
       {
-        path:'manageProducts',
-        element:<ManageProducts></ManageProducts>
+        path: "manageProducts",
+        element: <ManageProducts></ManageProducts>,
       },
       {
-        path:'myProducts',
-        element:<MyProducts></MyProducts>
-      }
-    ]
+        path: "myProducts",
+        element: <MyProducts></MyProducts>,
+      },
+      {
+        path: "productDetails/:id",
+        element: <ProductDetails></ProductDetails>,
+      },
+      // {
+      //   path:'editProduct/:id',
+      //   element:<EditProduct></EditProduct>
+      // }
+    ],
   },
 ]);
 export default route;

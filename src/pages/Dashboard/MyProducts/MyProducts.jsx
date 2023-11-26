@@ -1,9 +1,14 @@
+import { Link } from "react-router-dom";
 import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import useAuth from "../../../hooks/useAuth";
+import Loader from "../../../shared/Loader/Loader";
 
 const MyProducts = () => {
   const {user} = useAuth()
-  const {data:products} = useGetSecure(`/products/${user?.email}`,'userProducts')
+  const {data:products,isLoading} = useGetSecure(`/userProducts/${user?.email}`,'userProducts')
+  if(isLoading){
+    return <Loader></Loader>
+  }
   return (
     <div className="overflow-x-auto">
       <table className="table table-md">
@@ -15,8 +20,7 @@ const MyProducts = () => {
             <th>Up votes</th>
             <th>Edit</th>
             <th>Delete</th>
-            <th>view</th>
-           
+            <th>View</th>
           </tr>
         </thead>
         <tbody>
@@ -26,10 +30,24 @@ const MyProducts = () => {
               <td>{product?.name}</td>
               <td>{product?.status}</td>
               <td>{product?.upVotes}</td>
-              <td>Edit</td>
+              <td>
+                {" "}
+                <Link
+                  className="btn"
+                  to={`/dashboard/editProduct/${product?._id}`}
+                >
+                  Edit
+                </Link>
+              </td>
               <td>Delete</td>
-              <td>View</td>
-              
+              <td>
+                <Link
+                  className="btn"
+                  to={`/dashboard/productDetails/${product?._id}`}
+                >
+                  View
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
