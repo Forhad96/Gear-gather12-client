@@ -1,9 +1,12 @@
 
 import { useState } from "react";
 import TagInput from "./TagInput";
+import useAuth from "../../../hooks/useAuth";
+// import TagInput from "./TagInput";
 
 
 const AddProduct = () => {
+  const {user} =  useAuth()
 const [tags, setTags] = useState([]);
 
   const handleSubmit = (e) => {
@@ -28,17 +31,21 @@ const [tags, setTags] = useState([]);
 
   return (
     <div>
-      <div className="mb-4">
-        <label
-          htmlFor="tags"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Tags
-        </label>
-
-        <TagInput tags={tags} setTags={setTags}></TagInput>
-      </div>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8">
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-600">
+            Product Owner Info <span className="text-red-500">*</span>
+          </label>
+          <div className="flex items-center justify-between">
+            <div className="w-24 mask mask-squircle">
+              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            </div>
+            <div>
+              <p>Name:{user?.displayName}</p>
+              <p>Email:{user?.email}</p>
+            </div>
+          </div>
+        </div>
         <div className="mb-4">
           <label
             htmlFor="productName"
@@ -98,26 +105,14 @@ const [tags, setTags] = useState([]);
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">
-            Product Owner Info <span className="text-red-500">*</span>
+          <label
+            htmlFor="tags"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Tags
           </label>
-          <input
-            type="text"
-            readOnly
-            className="mt-1 p-2 w-full border rounded-md bg-gray-100"
-          />
-          <input
-            type="text"
-            readOnly
-            className="mt-1 p-2 w-full border rounded-md bg-gray-100"
-          />
-          <input
-            type="email"
-            readOnly
-            className="mt-1 p-2 w-full border rounded-md bg-gray-100"
-          />
+          <TagInput tags={tags} setTags={setTags}></TagInput>
         </div>
-
         <div className="mb-4">
           <label
             htmlFor="externalLinks"
