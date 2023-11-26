@@ -34,7 +34,7 @@ if(isLoading){
         image_url,
         price,
         description,
-        product_owner,
+
         category,
         externalLinks,
       } = Object.fromEntries(allInputData);

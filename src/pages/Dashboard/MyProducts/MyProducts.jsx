@@ -2,13 +2,47 @@ import { Link } from "react-router-dom";
 import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import useAuth from "../../../hooks/useAuth";
 import Loader from "../../../shared/Loader/Loader";
+import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
+import swal from "sweetalert";
 
 const MyProducts = () => {
-  const {user} = useAuth()
-  const {data:products,isLoading} = useGetSecure(`/userProducts/${user?.email}`,'userProducts')
-  if(isLoading){
-    return <Loader></Loader>
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const { data: products, isLoading,refetch } = useGetSecure(
+    `/userProducts/${user?.email}`,
+    "userProducts"
+  );
+
+  if (isLoading) {
+    return <Loader></Loader>;
   }
+
+  const handleDelete = async (id) => {
+    console.log(id);
+    try {
+      const willDelete = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      if (willDelete) {
+        const res = await axiosSecure.delete(`/products/${id}`);
+        if (res.data.deletedCount > 0) {
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+          refetch()
+        }
+        
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="overflow-x-auto">
       <table className="table table-md">
@@ -39,7 +73,14 @@ const MyProducts = () => {
                   Edit
                 </Link>
               </td>
-              <td>Delete</td>
+              <td>
+                <button
+                  className="btn"
+                  onClick={() => handleDelete(product?._id)}
+                >
+                  Delete
+                </button>
+              </td>
               <td>
                 <Link
                   className="btn"

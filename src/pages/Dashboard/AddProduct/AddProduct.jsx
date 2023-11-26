@@ -19,12 +19,11 @@ const AddProduct = () => {
         image_url,
         price,
         description,
-        product_owner,
         category,
         externalLinks,
       } = Object.fromEntries(allInputData);
       const imageUploadResponse = await imageUpload(image_url);
-      if(imageUploadResponse){
+      if (imageUploadResponse) {
         const product = {
           name,
           image_url: imageUploadResponse,
@@ -36,12 +35,11 @@ const AddProduct = () => {
           externalLinks,
         };
 
-        const res = await axiosSecure.post('/products',product)
+        const res = await axiosSecure.post("/products", product);
         toast.success("Product added successful");
         console.log(res.data);
         console.log(product);
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -174,8 +172,3 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
-const ownerInfo = {
-  ownerName: "John Doe",
-  ownerImage: "path/to/image.jpg",
-  ownerEmail: "john@example.com",
-};

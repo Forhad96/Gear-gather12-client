@@ -27,5 +27,5 @@
 -view user own single product 
 -create api for edit product
 -edit user own product
--todo:delete user own product
+-delete user own product
 
