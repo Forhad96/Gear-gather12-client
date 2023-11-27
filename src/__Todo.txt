@@ -35,6 +35,11 @@
 -moderator dashboard make featured functionality
 -moderator dashboard status functionality
 -create api for all accepted product
--todo: display all accepted product
+-display all accepted product
+-create api for search product
+-create api for search product by tag name
+-todo:create api for vote product
+-todo:implement vote logic
+
 
 
