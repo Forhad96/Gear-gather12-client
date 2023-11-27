@@ -34,19 +34,49 @@ const ManageProducts = () => {
     }
   };
 
-  const handleAccept = (productId) => {
+  const handleAccept = async(productId) => {
     // change the product status to Accepted
+
+        try {
     console.log(`Accept product ${productId}`);
+ 
+      const updateStatus = { status: "accepted" };
+      const res = await axiosSecure.patch(
+        `/products/${productId}`,
+        updateStatus
+      );
+          if(res.data.success){
+            refetch()
+            toast.success('successfully update status')
+          }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleReject = (productId) => {
+  const handleReject = async(productId) => {
     // change the product status to Rejected
     console.log(`Reject product ${productId}`);
+         try {
+
+ 
+      const updateStatus = { status: "rejected" };
+      const res = await axiosSecure.patch(
+        `/products/${productId}`,
+        updateStatus
+      );
+          if(res.data.success){
+            refetch()
+            toast.success('successfully update status')
+          }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="overflow-x-auto">
-      <table className="table table-zebra">
+      <table className="table table-md table-zebra">
         <thead>
           <tr>
             <th className="border border-gray-300">#</th>
@@ -72,7 +102,13 @@ const ManageProducts = () => {
             <tr className="hover" key={product._id}>
               <td className="border border-gray-300">#</td>
               <td className="border border-gray-300">{product.name}</td>
-              <td className="border border-gray-300">{product?.status}</td>
+              <td
+                className={`border border-gray-300 ${
+                  product?.status === "accepted" && "text-green-500"
+                }`}
+              >
+                {product?.status}
+              </td>
               <td className="border border-gray-300">
                 {product?.featured === true ? "YES" : "NO"}
               </td>
@@ -87,36 +123,33 @@ const ManageProducts = () => {
               </td>
               <td className="border border-gray-300 text-center">
                 <button
-                  onClick={() => handleMakeFeatured(product?._id,product?.featured)}
+                  onClick={() =>
+                    handleMakeFeatured(product?._id, product?.featured)
+                  }
                   className={`${
-                    product?.featured
-                      ? "bg-green-500"
-                      : "bg-yellow-500"
+                    product?.featured ? "bg-green-500" : "bg-yellow-500"
                   } text-white py-1 px-2 rounded-sm hover:bg-green-600`}
                 >
-                  {
-                    product?.featured ? "Featured":"Make Featured"
-                  }
-                  
+                  {product?.featured ? "Make Featureless" : "Make Featured"}
                 </button>
               </td>
               <td className="border border-gray-300 text-center">
                 <button
                   onClick={() => handleAccept(product?._id)}
-                  className="bg-green-500 text-white px-2 py-1 rounded-sm hover:bg-green-600"
-                  disabled={product.status === "Accepted"}
+                  className="bg-green-500 disabled:cursor-not-allowed disabled:bg-green-200 disabled:text-gray-500 text-white px-2 py-1 rounded-sm hover:bg-green-600"
+                  disabled={product?.status === "accepted"}
                 >
-                  Accept
+                  {product?.status === "accepted" ? "Accepted" : "Accept"}
                 </button>
               </td>
 
               <td className="border border-gray-300 text-center">
                 <button
                   onClick={() => handleReject(product?._id)}
-                  className="bg-red-500 text-white px-2 py-1 rounded-sm hover:bg-red-600"
-                  disabled={product.status === "Rejected"}
+                  className="bg-red-500 disabled:cursor-not-allowed disabled:bg-red-200 disabled:text-gray-500 text-white px-2 py-1 rounded-sm hover:bg-red-600"
+                  disabled={product?.status === "rejected"}
                 >
-                  Reject
+                  {product?.status === "rejected" ? "Rejected" : "Reject"}
                 </button>
               </td>
             </tr>
