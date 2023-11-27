@@ -1,23 +1,12 @@
 import { useParams } from "react-router-dom";
 import useGetSecure from "../../hooks/axiosSecureApi/useGetSecure";
+import Modal from "../Modal/Modal";
+import Report from "../../pages/Report/Report";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data: product } = useGetSecure(`/products/${id}`, "singleProduct");
 
-  console.log(product);
-  console.log(id);
-  // console.log(data);
-  // Static product details
-  //   const product = {
-  //     name: "Sample Product",
-  //     image:
-  //       "https://cdn.pixabay.com/photo/2016/01/01/13/56/vintage-tv-1116587_1280.jpg",
-  //     description: "This is a sample product description.",
-  //     tags: ["Tag1", "Tag2", "Tag3"],
-  //     externalLinks: ["https://link1.com", "https://link2.com"],
-  //     upvoteCount: 42,
-  //   };
 
   return (
     <div className="p-4">
@@ -49,11 +38,11 @@ const ProductDetails = () => {
         {/* External Links */}
         <div className="mb-4">
           <span className="mr-2">External Links:</span>
-          {/* {product?.externalLinks?.map((link, index) => (
+          {product?.externalLinks?.map((link, index) => (
             <a key={index} href={link} className="underline mr-2">
               {link}
             </a>
-          ))} */}
+          ))}
         </div>
 
         {/* Upvote Button */}
@@ -62,10 +51,15 @@ const ProductDetails = () => {
         </button>
 
         {/* Report Button */}
-        <button className="bg-red-500 text-white px-4 py-2 rounded mb-4">
+        <button
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+          className="bg-red-500 text-white px-4 py-2 rounded mb-4"
+        >
           Report
         </button>
-
+            <Modal>
+              <Report></Report>
+            </Modal>
         {/* Upvote Count */}
         <div className="text-gray-500 mb-4">Upvotes: {product?.upVotes}</div>
       </div>

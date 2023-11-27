@@ -3,7 +3,7 @@ import Loader from "../../shared/Loader/Loader";
 import useAxiosPublic from "../../hooks/axiosPublicApi/useAxiosPublic";
 import useGetPublicData from "../../hooks/axiosPublicApi/useGetPublicData";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
 import useCheckRole from "../../hooks/useCheckRole";
 const Products = () => {
@@ -46,11 +46,14 @@ console.log(userInfo.userId);
       console.log("click");
       // const voteInfo = { action: vote,userId:userInfo?.userId };
 
-      if (user?.email) {
+      if (user?.email && userInfo?.userId) {
               const res = await axiosSecure.post(
                 `/votes/${product_id}/${userInfo.userId}/?action=${vote}`
               );
-              refetch();
+              if (res.data.success){
+
+                refetch();
+              } 
               console.log(res);
       } else {
         goTo("/login");
@@ -120,7 +123,7 @@ console.log(userInfo.userId);
                   <button
                     onClick={() => handleVote(product._id, "upvote")}
                     type="button"
-                    className="bg-yellow-500 hover:bg-yellow-400 text-white px-4 py-2 rounded-full flex items-center"
+                    className="bg-yellow-500 hover:bg-yellow-400 text-white px-2 py-1 rounded-full flex items-center"
                     // To be enabled based on user login status and product ownership
                   >
                     <span className="mr-2">{product?.upVotes}</span>
@@ -141,7 +144,7 @@ console.log(userInfo.userId);
                   </button>
                   <button
                     onClick={() => handleVote(product._id, "downvote")}
-                    className="bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-full flex items-center ml-2"
+                    className="bg-red-500 hover:bg-red-400 text-white px-2 py-1 rounded-full flex items-center ml-2"
                     // To be enabled based on user login status and product ownership
                   >
                     <span className="mr-2">{product?.downVotes}</span>
@@ -162,10 +165,10 @@ console.log(userInfo.userId);
                   </button>
                 </div>
                 <button
-                  className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-full"
+                  className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-1 rounded-full"
                   // To be enabled based on user login status and product ownership
                 >
-                  View Details
+                  <Link to={`/productDetails/${product?._id}`}>View Details</Link>
                 </button>
               </div>
             </div>

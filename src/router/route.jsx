@@ -43,6 +43,14 @@ const route = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
+      {
+        path: "/productDetails/:id",
+        element: (
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -80,12 +88,16 @@ const route = createBrowserRouter([
       },
       {
         path: "productDetails/:id",
-        element: <ProductDetails></ProductDetails>,
+        element: (
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
       },
       {
-        path:'editProduct/:id',
-        element:<EditProduct></EditProduct>
-      }
+        path: "editProduct/:id",
+        element: <EditProduct></EditProduct>,
+      },
     ],
   },
 ]);
