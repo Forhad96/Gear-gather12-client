@@ -2,16 +2,25 @@ import { useEffect, useState } from "react";
 import Loader from "../../shared/Loader/Loader";
 import useAxiosPublic from "../../hooks/axiosPublicApi/useAxiosPublic";
 import useGetPublicData from "../../hooks/axiosPublicApi/useGetPublicData";
-
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
+import useCheckRole from "../../hooks/useCheckRole";
 const Products = () => {
+  const { user } = useAuth();
+  const goTo = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+
   const [products, setProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const { data, isLoading } = useGetPublicData(
+  const {userInfo} = useCheckRole();
+  const { data, isLoading,refetch } = useGetPublicData(
     "/verifiedProducts",
     "verifiedProducts",
     searchValue
   );
+console.log(userInfo.userId);
 
   useEffect(() => {
     setProducts(data);
@@ -20,13 +29,32 @@ const Products = () => {
   if (isLoading) {
     return <Loader></Loader>;
   }
-
+// console.log(userInfo);
   const handleSearch = async () => {
     try {
       const res = await axiosPublic(
         `/verifiedProducts/?searchValue=${searchValue}`
       );
       setProducts(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleVote = async (product_id, vote) => {
+    try {
+      console.log("click");
+      // const voteInfo = { action: vote,userId:userInfo?.userId };
+
+      if (user?.email) {
+              const res = await axiosSecure.post(
+                `/votes/${product_id}/${userInfo.userId}/?action=${vote}`
+              );
+              refetch();
+              console.log(res);
+      } else {
+        goTo("/login");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -90,10 +118,12 @@ const Products = () => {
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <button
+                    onClick={() => handleVote(product._id, "upvote")}
+                    type="button"
                     className="bg-yellow-500 hover:bg-yellow-400 text-white px-4 py-2 rounded-full flex items-center"
-                    disabled // To be enabled based on user login status and product ownership
+                    // To be enabled based on user login status and product ownership
                   >
-                    <span className="mr-2">10</span>
+                    <span className="mr-2">{product?.upVotes}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -110,10 +140,11 @@ const Products = () => {
                     </svg>
                   </button>
                   <button
+                    onClick={() => handleVote(product._id, "downvote")}
                     className="bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-full flex items-center ml-2"
-                    disabled // To be enabled based on user login status and product ownership
+                    // To be enabled based on user login status and product ownership
                   >
-                    <span className="mr-2">5</span>
+                    <span className="mr-2">{product?.downVotes}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -132,7 +163,7 @@ const Products = () => {
                 </div>
                 <button
                   className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-full"
-                  disabled // To be enabled based on user login status and product ownership
+                  // To be enabled based on user login status and product ownership
                 >
                   View Details
                 </button>

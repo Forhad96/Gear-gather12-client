@@ -2,12 +2,10 @@ import { Link } from "react-router-dom";
 import useCheckRole from "../../hooks/useCheckRole";
 
 const Aside = () => {
-  const { data: role, isLoading } = useCheckRole();
-  if (isLoading) {
-    return <h1>loading...</h1>;
-  }
-  console.log(role);
-  // const isAdmin = f
+  const { userInfo:user } = useCheckRole();
+
+  console.log(user);
+
   return (
     <aside className="bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
       <div className="relative border-b border-white/20">
@@ -41,9 +39,9 @@ const Aside = () => {
       </div>
       <div className="m-4">
         {/* Admin Link */}
-        {role?.role === "admin" && { adminLinks }}
-        {role?.role === "user" && <>{usersLInks}</>}
-        {role?.role === "moderator" && <>{moderatorLinks}</>}
+        {user?.role === "admin" && { adminLinks }}
+        {user?.role === "user" && <>{usersLInks}</>}
+        {user?.role === "moderator" && <>{moderatorLinks}</>}
 
         <ul className="mb-4 flex flex-col gap-1">
           <li className="mx-3.5 mt-4 mb-2">

@@ -38,8 +38,10 @@
 -display all accepted product
 -create api for search product
 -create api for search product by tag name
--todo:create api for vote product
--todo:implement vote logic
+-create api for vote product
+-implement vote logic
+-todo:create api of report product
+-todo:implement report product functionality
 
 
 
