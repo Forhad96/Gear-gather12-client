@@ -31,8 +31,8 @@
 -*todo:create admin context
 -create moderator routes
 -display product list moderator routes
--todo: view product moderator dashboard
+-view product details moderator dashboard
 -todo: moderator dashboard make featured functionality
 -todo: moderator dashboard status functionality
-=
+
 

@@ -42,7 +42,7 @@ const Aside = () => {
       <div className="m-4">
         {/* Admin Link */}
         {role?.role === "admin" && { adminLinks }}
-        {role?.role === "user" && { usersLInks }}
+        {role?.role === "user" && <>{usersLInks}</>}
         {role?.role === "moderator" && <>{moderatorLinks}</>}
 
         <ul className="mb-4 flex flex-col gap-1">

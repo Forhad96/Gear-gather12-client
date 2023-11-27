@@ -2,32 +2,34 @@ import { useState } from "react";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
 import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const ManageProducts = () => {
-  const axiosSecure = useAxiosSecure()
-  const {user} = useAuth()
-  const {data:products} = useGetSecure(`/products`,'products')
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const goTo = useNavigate();
+  const { data: products } = useGetSecure(`/products`, "products");
 
-const handleViewDetails = (productId) => {
-  // Add logic to navigate to the product details page
-  console.log(`View details for product ${productId}`);
-};
+  const handleViewDetails = (productId) => {
+    // Add logic to navigate to the product details page
+    console.log(`View details for product ${productId}`);
+    goTo(`/dashboard/productDetails/${productId}`);
+  };
 
-const handleMakeFeatured = (productId) => {
-  // Add logic to mark the product as featured
-  console.log(`Make featured for product ${productId}`);
-};
+  const handleMakeFeatured = (productId) => {
+    // Add logic to mark the product as featured
+    console.log(`Make featured for product ${productId}`);
+  };
 
-const handleAccept = (productId) => {
-  // Add logic to change the product status to Accepted
-  console.log(`Accept product ${productId}`);
-};
+  const handleAccept = (productId) => {
+    // Add logic to change the product status to Accepted
+    console.log(`Accept product ${productId}`);
+  };
 
-const handleReject = (productId) => {
-  // Add logic to change the product status to Rejected
-  console.log(`Reject product ${productId}`);
-};
-
+  const handleReject = (productId) => {
+    // Add logic to change the product status to Rejected
+    console.log(`Reject product ${productId}`);
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -53,16 +55,18 @@ const handleReject = (productId) => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr className="hover" key={product.id}>
+          {products?.map((product) => (
+            <tr className="hover" key={product._id}>
               <td className="border border-gray-300">#</td>
               <td className="border border-gray-300">{product.name}</td>
               <td className="border border-gray-300">{product?.status}</td>
-              <td className="border border-gray-300">{product?.featured === true ? "YES":"NO"}</td>
+              <td className="border border-gray-300">
+                {product?.featured === true ? "YES" : "NO"}
+              </td>
 
               <td className="border border-gray-300 text-center">
                 <button
-                  onClick={() => handleViewDetails(product?.id)}
+                  onClick={() => handleViewDetails(product?._id)}
                   className="bg-blue-500 text-white py-1 px-2 rounded-sm hover:bg-blue-600"
                 >
                   View Details
@@ -70,7 +74,7 @@ const handleReject = (productId) => {
               </td>
               <td className="border border-gray-300 text-center">
                 <button
-                  onClick={() => handleMakeFeatured(product?.id)}
+                  onClick={() => handleMakeFeatured(product?._id)}
                   className={`${
                     product.status === "Featured"
                       ? "bg-yellow-500"
@@ -82,7 +86,7 @@ const handleReject = (productId) => {
               </td>
               <td className="border border-gray-300 text-center">
                 <button
-                  onClick={() => handleAccept(product?.id)}
+                  onClick={() => handleAccept(product?._id)}
                   className="bg-green-500 text-white px-2 py-1 rounded-sm hover:bg-green-600"
                   disabled={product.status === "Accepted"}
                 >
@@ -92,7 +96,7 @@ const handleReject = (productId) => {
 
               <td className="border border-gray-300 text-center">
                 <button
-                  onClick={() => handleReject(product?.id)}
+                  onClick={() => handleReject(product?._id)}
                   className="bg-red-500 text-white px-2 py-1 rounded-sm hover:bg-red-600"
                   disabled={product.status === "Rejected"}
                 >

@@ -1,21 +1,23 @@
-
 import { useParams } from "react-router-dom";
 import useGetSecure from "../../hooks/axiosSecureApi/useGetSecure";
 
 const ProductDetails = () => {
-    const {id} = useParams()
-    const {data:product} = useGetSecure(`/products/${id}`,'singleProduct')
-    // console.log(data);
+  const { id } = useParams();
+  const { data: product } = useGetSecure(`/products/${id}`, "singleProduct");
+
+  console.log(product);
+  console.log(id);
+  // console.log(data);
   // Static product details
-//   const product = {
-//     name: "Sample Product",
-//     image:
-//       "https://cdn.pixabay.com/photo/2016/01/01/13/56/vintage-tv-1116587_1280.jpg",
-//     description: "This is a sample product description.",
-//     tags: ["Tag1", "Tag2", "Tag3"],
-//     externalLinks: ["https://link1.com", "https://link2.com"],
-//     upvoteCount: 42,
-//   };
+  //   const product = {
+  //     name: "Sample Product",
+  //     image:
+  //       "https://cdn.pixabay.com/photo/2016/01/01/13/56/vintage-tv-1116587_1280.jpg",
+  //     description: "This is a sample product description.",
+  //     tags: ["Tag1", "Tag2", "Tag3"],
+  //     externalLinks: ["https://link1.com", "https://link2.com"],
+  //     upvoteCount: 42,
+  //   };
 
   return (
     <div className="p-4">
