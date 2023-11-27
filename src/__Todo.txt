@@ -34,5 +34,7 @@
 -view product details moderator dashboard
 -moderator dashboard make featured functionality
 -moderator dashboard status functionality
+-create api for all accepted product
+-todo: display all accepted product
 
 
