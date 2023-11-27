@@ -43,6 +43,7 @@
 -carate modal and report form
 -create api of report product
 -report save database
+-create api for display all reported products
 -todo:implement report product functionality
 -todo: reported content page
 

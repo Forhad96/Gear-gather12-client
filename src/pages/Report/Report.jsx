@@ -9,7 +9,6 @@ const Report = ({productId}) => {
       const form = new FormData(e.currentTarget);
         const subject = form.get('subject')
         const message = form.get('message')
-        console.log('click',subject,message);
 
         const newReport = {
             productId,

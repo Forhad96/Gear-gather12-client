@@ -16,6 +16,7 @@ import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import ProductDetails from "../shared/ProductDetails/ProductDetails";
 import EditProduct from "../shared/EditProduct/EditProduct";
 import PrivateRoute from "./PrivateRoute";
+import ReportedContent from "../pages/Dashboard/ReportedContent/ReportedContent";
 
 const route = createBrowserRouter([
   {
@@ -98,6 +99,10 @@ const route = createBrowserRouter([
         path: "editProduct/:id",
         element: <EditProduct></EditProduct>,
       },
+      {
+        path:'reportedContent',
+        element:<ReportedContent></ReportedContent>
+      }
     ],
   },
 ]);
