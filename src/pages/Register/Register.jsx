@@ -17,39 +17,80 @@ const Register = () => {
   console.log(user);
 
   // handle for register
-  const handleRegister = async (e) => {
-    try {
-      e.preventDefault();
-      const allInputData = new FormData(e.target);
-      const { name, email, password, photo } = Object.fromEntries(allInputData);
+//   const handleRegister = async (e) => {
+//     try {
+//       e.preventDefault();
+//       const allInputData = new FormData(e.target);
+//       const { name, email, password, photo } = Object.fromEntries(allInputData);
 
-      const imageUploadResponse = await imageUpload(photo);
+//       const imageUploadResponse = await imageUpload(photo);
 
-      if (imageUploadResponse) {
-        // create user function
-        const createResult = await createUser(email, password);
-        console.log(createResult.user);
+//       if (imageUploadResponse) {
+//         // create user function
+//         const createResult = await createUser(email, password);
+//         console.log(createResult.user);
 
-await updateUserProfile(name, imageUploadResponse);
-        // save user data to database
-        const user = {
-          name,
-          email,
-        };
-        const postRes = await axiosPublic.post("/users", user);
-        // const postRes =  await postData('/users',user)
-        console.log("Post res", postRes);
+// await updateUserProfile(name, imageUploadResponse);
+//         // save user data to database
+//         const user = {
+//           name,
+//           email,
+//         };
+//         const postRes = await axiosPublic.post("/users", user);
+//         // const postRes =  await postData('/users',user)
+//         console.log("Post res", postRes);
 
-        toast.success("Account created successful");
-        goTo("/");
-      }
-      // i want to react hot tost promise here when user create successful
+//         toast.success("Account created successful");
+//         goTo("/");
+//       }
+//       // i want to react hot tost promise here when user create successful
       
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//     } catch (err) {
+//       console.log(err);
+//       toast.error(err)
+//     }
+//   };
+const handleRegister = async (e) => {
+  try {
+    e.preventDefault();
 
+    const allInputData = new FormData(e.target);
+    const { name, email, password, photo } = Object.fromEntries(allInputData);
+
+    // Input validation (you can use a library like Yup for validation)
+    if (!name || !email || !password || !photo) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+
+    const imageUploadResponse = await imageUpload(photo);
+
+    if (imageUploadResponse) {
+      const createResult = await createUser(email, password);
+      console.log(createResult.user);
+
+      await updateUserProfile(name, imageUploadResponse);
+
+      const user = {
+        name,
+        email,
+      };
+      const postRes = await axiosPublic.post("/users", user);
+      console.log("Post res", postRes);
+
+      toast.success("Account created successfully");
+      goTo("/");
+    }
+  } catch (error) {
+    console.error(error);
+
+    if (error.response && error.response.status === 409) {
+      toast.error("Email is already in use. Please choose another.");
+    } else {
+      toast.error("Error creating account. Please try again.");
+    }
+  }
+};
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600 space-y-5">

@@ -28,4 +28,11 @@
 -create api for edit product
 -edit user own product
 -delete user own product
+-*todo:create admin context
+-create moderator routes
+-display product list moderator routes
+-todo: view product moderator dashboard
+-todo: moderator dashboard make featured functionality
+-todo: moderator dashboard status functionality
+=
 

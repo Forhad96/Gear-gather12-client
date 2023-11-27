@@ -56,15 +56,16 @@ const AuthProvider = ({ children }) => {
         const userEmail = currentUser?.email || user?.email
         const loggedUser = {email:userEmail}
         setUser(currentUser);
-        setLoading(false)
+
         if (currentUser) {
           const res = await axiosPublic.post('/jwt',loggedUser)
           console.log('token response',res.data);
-
+        setLoading(false);
         }
         else{
           const res = await axiosPublic.post('/logout',loggedUser)
           console.log('logout', res.data);
+                  setLoading(false);
         }
       } catch (error) {
         console.log(error);
