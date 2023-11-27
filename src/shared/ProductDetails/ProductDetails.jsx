@@ -58,7 +58,7 @@ const ProductDetails = () => {
           Report
         </button>
             <Modal>
-              <Report></Report>
+              <Report productId={product?._id}></Report>
             </Modal>
         {/* Upvote Count */}
         <div className="text-gray-500 mb-4">Upvotes: {product?.upVotes}</div>

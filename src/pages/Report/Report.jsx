@@ -1,10 +1,35 @@
-const Report = () => {
+import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
+import toast from 'react-hot-toast'
+const Report = ({productId}) => {
+    const axiosSecure = useAxiosSecure()
+    const {user} = useAuth()
     const handelReport = async(e)=>{
         e.preventDefault()
       const form = new FormData(e.currentTarget);
         const subject = form.get('subject')
         const message = form.get('message')
         console.log('click',subject,message);
+
+        const newReport = {
+            productId,
+            email:user?.email,
+            subject,
+            message
+        }
+
+        try {
+            const res = await axiosSecure.post('/report',newReport)
+            console.log(res);
+            if(res.data.success){
+                toast.success('report sent successful')
+                
+                e.target.reset()
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
     return (
       <form onClick={handelReport} className="card-body">
