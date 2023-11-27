@@ -3,31 +3,44 @@ import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
 import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-
+import toast from 'react-hot-toast'
 const ManageProducts = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const goTo = useNavigate();
-  const { data: products } = useGetSecure(`/products`, "products");
+  const { data: products,refetch } = useGetSecure(`/products`, "products");
 
   const handleViewDetails = (productId) => {
-    // Add logic to navigate to the product details page
+    // navigate to the product details page
     console.log(`View details for product ${productId}`);
     goTo(`/dashboard/productDetails/${productId}`);
   };
 
-  const handleMakeFeatured = (productId) => {
-    // Add logic to mark the product as featured
-    console.log(`Make featured for product ${productId}`);
+  const handleMakeFeatured = async (productId, featured) => {
+    // mark the product as featured
+    try {
+      console.log(`Make featured for product ${productId}`);
+      const updateFeatured = { featured: !featured };
+      const res = await axiosSecure.patch(
+        `/products/${productId}`,
+        updateFeatured
+      );
+          if(res.data.success){
+            refetch()
+            toast.success('successfully changed')
+          }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleAccept = (productId) => {
-    // Add logic to change the product status to Accepted
+    // change the product status to Accepted
     console.log(`Accept product ${productId}`);
   };
 
   const handleReject = (productId) => {
-    // Add logic to change the product status to Rejected
+    // change the product status to Rejected
     console.log(`Reject product ${productId}`);
   };
 
@@ -74,14 +87,17 @@ const ManageProducts = () => {
               </td>
               <td className="border border-gray-300 text-center">
                 <button
-                  onClick={() => handleMakeFeatured(product?._id)}
+                  onClick={() => handleMakeFeatured(product?._id,product?.featured)}
                   className={`${
-                    product.status === "Featured"
-                      ? "bg-yellow-500"
-                      : "bg-green-500"
+                    product?.featured
+                      ? "bg-green-500"
+                      : "bg-yellow-500"
                   } text-white py-1 px-2 rounded-sm hover:bg-green-600`}
                 >
-                  Make Featured
+                  {
+                    product?.featured ? "Featured":"Make Featured"
+                  }
+                  
                 </button>
               </td>
               <td className="border border-gray-300 text-center">

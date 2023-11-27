@@ -32,7 +32,7 @@
 -create moderator routes
 -display product list moderator routes
 -view product details moderator dashboard
--todo: moderator dashboard make featured functionality
+- moderator dashboard make featured functionality
 -todo: moderator dashboard status functionality
 
 
