@@ -44,8 +44,17 @@
 -create api of report product
 -report save database
 -create api for display all reported products
--todo:implement report product functionality
--todo: reported content page
+-reported content page
+-todo:report product view details
+-disable vote button and report button for product owner, admin and moderator 
+
+
+
+-todo:product pagination-
+-todo-create readme.md file
+-todo:disable vote button for product owner
+-todo:disable vote button after vote
+ 
 
 
 

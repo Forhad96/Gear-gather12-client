@@ -2,12 +2,24 @@ import { useParams } from "react-router-dom";
 import useGetSecure from "../../hooks/axiosSecureApi/useGetSecure";
 import Modal from "../Modal/Modal";
 import Report from "../../pages/Report/Report";
+import useCheckRole from "../../hooks/useCheckRole";
+import { useEffect, useState } from "react";
 
 const ProductDetails = () => {
+  const {userInfo} = useCheckRole()
   const { id } = useParams();
+  const [disabled,setDisable] = useState(false)
   const { data: product } = useGetSecure(`/products/${id}`, "singleProduct");
-
-
+console.log(userInfo);
+useEffect(()=>{
+  if (
+    userInfo?.role === "admin" ||
+    userInfo?.role === "moderator" ||
+    product?.product_owner === userInfo?.email
+  ) {
+    setDisable(true);
+  }
+},[userInfo,product])
   return (
     <div className="p-4">
       {/* Product Details Section */}
@@ -46,20 +58,24 @@ const ProductDetails = () => {
         </div>
 
         {/* Upvote Button */}
-        <button className="bg-blue-500 text-white px-4 py-2 rounded mb-2">
+        <button
+          disabled={disabled}
+          className="bg-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed text-white px-4 py-2 rounded mb-2"
+        >
           Upvote
         </button>
 
         {/* Report Button */}
         <button
           onClick={() => document.getElementById("my_modal_3").showModal()}
-          className="bg-red-500 text-white px-4 py-2 rounded mb-4"
+          className="bg-red-500 disabled:bg-red-300 disabled:cursor-not-allowed text-white px-4 py-2 rounded mb-4"
+          disabled={disabled}
         >
           Report
         </button>
-            <Modal>
-              <Report productId={product?._id}></Report>
-            </Modal>
+        <Modal>
+          <Report productId={product?._id}></Report>
+        </Modal>
         {/* Upvote Count */}
         <div className="text-gray-500 mb-4">Upvotes: {product?.upVotes}</div>
       </div>
