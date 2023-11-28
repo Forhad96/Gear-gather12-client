@@ -51,8 +51,10 @@
 -create api for product specific report
 -create slider for banner section
 -create api for featured product sort latest upload product first 
--todo:display featured product
--todo:
+-display featured product
+-todo:create api for trending product sort by vote count
+-todo:create trending product routes and components
+-todo:load trending product data and display
 
 
 

@@ -7,7 +7,23 @@ const VoteButton = ({ product, refetch }) => {
   const { user } = useAuth();
   const { userInfo } = useCheckRole();
   const axiosSecure = useAxiosSecure();
+  const [vote,setVote] = useState()
   const goTo = useNavigate();
+
+
+  useEffect(()=>{
+    if(product){
+        product?.votedUsers?.map(vote =>{
+            if(vote.action === "upvote"){
+                setVote('upvote')
+            }
+            else if(vote.action === 'downvote'){
+
+                setVote('downvote')
+            }
+        })
+    }
+  },[product])
   const handleVote = async (product_id, vote) => {
     try {
       console.log("click");
@@ -34,8 +50,8 @@ const VoteButton = ({ product, refetch }) => {
       <button
         onClick={() => handleVote(product._id, "upvote")}
         type="button"
-        className="bg-yellow-500 hover:bg-yellow-400 text-white px-2 py-1 rounded-full flex items-center"
-        // To be enabled based on user login status and product ownership
+        className="bg-yellow-500 hover:bg-yellow-400 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:opacity-50 disabled:text-black text-white px-2 py-1 rounded-full flex items-center"
+        disabled={vote === "upvote"}
       >
         <span className="mr-2">{product?.upVotes}</span>
         <svg
@@ -55,8 +71,8 @@ const VoteButton = ({ product, refetch }) => {
       </button>
       <button
         onClick={() => handleVote(product._id, "downvote")}
-        className="bg-red-500 hover:bg-red-400 text-white px-2 py-1 rounded-full flex items-center ml-2"
-        // To be enabled based on user login status and product ownership
+        className="bg-red-500 hover:bg-red-400 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:opacity-50 disabled:text-black text-white px-2 py-1 rounded-full flex items-center ml-2"
+        disabled={vote === "downvote"}
       >
         <span className="mr-2">{product?.downVotes}</span>
         <svg
@@ -79,6 +95,7 @@ const VoteButton = ({ product, refetch }) => {
 };
 
 import PropTypes from 'prop-types';
+import { useEffect, useState } from "react";
 
 VoteButton.propTypes = {
     product: PropTypes.object.isRequired,
