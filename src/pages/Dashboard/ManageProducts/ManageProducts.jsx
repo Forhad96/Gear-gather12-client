@@ -98,9 +98,9 @@ const ManageProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products?.map((product) => (
+          {products?.map((product,idx) => (
             <tr className="hover" key={product._id}>
-              <td className="border border-gray-300">#</td>
+              <td className="border border-gray-300">{idx+1}</td>
               <td className="border border-gray-300">{product.name}</td>
               <td
                 className={`border border-gray-300 ${

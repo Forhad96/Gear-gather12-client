@@ -21,7 +21,7 @@ const ReportedContent = () => {
               <th className="border border-gray-300">#</th>
               <th className="border border-gray-300">Product Name</th>
               <th className="border border-gray-300 text-center">
-                View Report{" "}
+                View Report
               </th>
 
               <th className="border border-gray-300 text-center">
@@ -31,16 +31,16 @@ const ReportedContent = () => {
             </tr>
           </thead>
           <tbody>
-            {products?.map((product) => (
+            {products?.map((product, idx) => (
               <tr className="hover" key={product._id}>
-                <td className="border border-gray-300">#</td>
+                <td className="border border-gray-300">{idx + 1}</td>
                 <td className="border border-gray-300">{product.name}</td>
                 <td className="border border-gray-300 text-center">
                   <button
                     onClick={() => handleViewDetails(product?._id)}
-                    className="bg-red-500 text-white py-1 px-2 rounded-sm hover:bg-blue-600"
+                    className="bg-red-500 text-white py-1 px-2 rounded-sm hover:bg-red-600"
                   >
-                    View Reports
+                    <Link to={`/dashboard/viewReports/${product?._id}`}>View Reports</Link>
                   </button>
                 </td>
 
@@ -49,7 +49,9 @@ const ReportedContent = () => {
                     onClick={() => handleViewDetails(product?._id)}
                     className="bg-blue-500 text-white py-1 px-2 rounded-sm hover:bg-blue-600"
                   >
-                    <Link to={`/dashboard/productDetails/${product?._id}`}>View Details</Link>
+                    <Link to={`/dashboard/productDetails/${product?._id}`}>
+                      View Details
+                    </Link>
                   </button>
                 </td>
 

@@ -45,8 +45,13 @@
 -report save database
 -create api for display all reported products
 -reported content page
--todo:report product view details
--disable vote button and report button for product owner, admin and moderator 
+-report product view details
+-disable vote button and report button for product owner, admin and moderator
+-create view reports page and routes 
+-todo:create api for product specific report
+-todo:load report data form database and view reports data on view reports page
+-todo:moderator reported product delete functionality
+-todo:
 
 
 

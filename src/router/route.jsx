@@ -17,6 +17,7 @@ import ProductDetails from "../shared/ProductDetails/ProductDetails";
 import EditProduct from "../shared/EditProduct/EditProduct";
 import PrivateRoute from "./PrivateRoute";
 import ReportedContent from "../pages/Dashboard/ReportedContent/ReportedContent";
+import ViewReports from "../pages/Dashboard/ReportedContent/ViewReports";
 
 const route = createBrowserRouter([
   {
@@ -100,9 +101,17 @@ const route = createBrowserRouter([
         element: <EditProduct></EditProduct>,
       },
       {
-        path:'reportedContent',
-        element:<ReportedContent></ReportedContent>
-      }
+        path: "reportedContent",
+        element: <ReportedContent></ReportedContent>,
+      },
+      {
+        path: "viewReports/:id",
+        element: (
+          <PrivateRoute>
+            <ViewReports></ViewReports>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

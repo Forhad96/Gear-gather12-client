@@ -10,7 +10,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [disabled,setDisable] = useState(false)
   const { data: product } = useGetSecure(`/products/${id}`, "singleProduct");
-console.log(userInfo);
+
 useEffect(()=>{
   if (
     userInfo?.role === "admin" ||
