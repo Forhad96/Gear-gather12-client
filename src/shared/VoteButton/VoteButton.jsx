@@ -7,6 +7,7 @@ const VoteButton = ({ product, refetch }) => {
   const { user } = useAuth();
   const { userInfo } = useCheckRole();
   const axiosSecure = useAxiosSecure();
+    const [disabled, setDisable] = useState(false);
   const [vote,setVote] = useState()
   const goTo = useNavigate();
 
@@ -24,9 +25,19 @@ const VoteButton = ({ product, refetch }) => {
         })
     }
   },[product])
+
+
+  useEffect(() => {
+    if (
+      userInfo?.role === "admin" ||
+      userInfo?.role === "moderator" ||
+      product?.product_owner === userInfo?.email
+    ) {
+      setDisable(true);
+    }
+  }, [userInfo, product]);
   const handleVote = async (product_id, vote) => {
     try {
-      console.log("click");
       // const voteInfo = { action: vote,userId:userInfo?.userId };
 
       if (user?.email && userInfo?.userId) {
@@ -51,7 +62,7 @@ const VoteButton = ({ product, refetch }) => {
         onClick={() => handleVote(product._id, "upvote")}
         type="button"
         className="bg-yellow-500 hover:bg-yellow-400 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:opacity-50 disabled:text-black text-white px-2 py-1 rounded-full flex items-center"
-        disabled={vote === "upvote"}
+        disabled={vote === "upvote" || disabled}
       >
         <span className="mr-2">{product?.upVotes}</span>
         <svg
@@ -71,8 +82,8 @@ const VoteButton = ({ product, refetch }) => {
       </button>
       <button
         onClick={() => handleVote(product._id, "downvote")}
-        className="bg-red-500 hover:bg-red-400 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:opacity-50 disabled:text-black text-white px-2 py-1 rounded-full flex items-center ml-2"
-        disabled={vote === "downvote"}
+        className="bg-red-500 hover:bg-neutral disabled:cursor-not-allowed disabled:bg-gray-300 disabled:opacity-50 disabled:text-black text-white px-2 py-1 rounded-full flex items-center ml-2"
+        disabled={vote === "downvote" || disabled}
       >
         <span className="mr-2">{product?.downVotes}</span>
         <svg
@@ -80,7 +91,7 @@ const VoteButton = ({ product, refetch }) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-4 h-4"
         >
           <path
             strokeLinecap="round"

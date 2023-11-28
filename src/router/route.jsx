@@ -53,6 +53,9 @@ const route = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+    
+      }
     ],
   },
   {

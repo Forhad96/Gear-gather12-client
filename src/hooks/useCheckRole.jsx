@@ -21,13 +21,12 @@ const useCheckRole = () => {
       const fetchData =async()=>{
    const res =await axiosSecure.get(`/users/checkRole/${user?.email}`)
    setUerInfo(res.data)
-   console.log(res);
       }
 fetchData()
         
   
     }
-  }, [user, axiosSecure]);
+  }, [user?.email, axiosSecure]);
 
 
 

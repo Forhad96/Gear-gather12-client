@@ -12,7 +12,7 @@ const axiosPublic = axios.create({
 const Navbar = () => {
   const {user,loading} = useAuth()
   return (
-    <div className="navbar max-w-7xl mx-auto bg-base-100">
+    <div className="navbar z-10 max-w-7xl mx-auto bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -44,7 +44,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end gap-5">
-        <ThemeController></ThemeController>
+        {/* <ThemeController></ThemeController> */}
 
         {
           

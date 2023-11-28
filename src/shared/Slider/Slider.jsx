@@ -59,7 +59,7 @@ export default function Slider() {
           clickable: true,
         }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        modules={[Autoplay, Navigation]}
         className="mySwiper flex items-center justify-center h-[600px]"
       >
         {images?.map((image, idx) => (
