@@ -2,6 +2,7 @@ import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import toast from 'react-hot-toast'
 const Report = ({productId}) => {
+  
     const axiosSecure = useAxiosSecure()
     const {user} = useAuth()
     const handelReport = async(e)=>{
@@ -59,5 +60,10 @@ const Report = ({productId}) => {
         </div>
       </form>
     );
+};
+import PropTypes from 'prop-types';
+
+Report.propTypes = {
+  productId: PropTypes.string,
 };
 export default Report;
