@@ -22,7 +22,8 @@
     "react-router-dom": "^6.20.0",
     "react-tag-input-component": "^2.0.2",
     "sort-by": "^0.0.2",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

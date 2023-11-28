@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
-const useGetPublicData = ( endpoint, key ) => {
+const useGetPublicData = (endpoint, key) => {
   const axiosPublic = useAxiosPublic();
   const res = useQuery({
     queryKey: [key],

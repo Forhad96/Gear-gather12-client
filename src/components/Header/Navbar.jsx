@@ -11,19 +11,8 @@ const axiosPublic = axios.create({
 });
 const Navbar = () => {
   const {user,loading} = useAuth()
-  // const { data } = useQuery({
-  //   queryKey: ["bookings"],
-  //   queryFn: async () => {
-  //     const res = await axiosPublic.get("/rooms");
-  //     return res.data;
-  //   },
-  // });
-  // console.log(data);
-// if(loading){
-//   return <Loader></Loader>
-// }
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar max-w-7xl mx-auto bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
