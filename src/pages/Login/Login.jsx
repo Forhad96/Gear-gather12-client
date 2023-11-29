@@ -72,21 +72,16 @@ const Login = () => {
               ></label>
               <span>Remember me</span>
             </div>
-            <a className="text-center text-indigo-600 hover:text-indigo-500">
-              Forgot password?
-            </a>
+            <a className="text-center btn btn-link">Forgot password?</a>
           </div>
-          <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+          <button className="w-full px-4 py-2 text-white font-medium btn btn-primary active:bg-primary rounded-lg duration-150">
             Sign in
           </button>
         </form>
         <SocialLogin></SocialLogin>
         <p className="text-center">
-          Dont have an account?{" "}
-          <Link
-            to="/register"
-            className="font-medium text-indigo-600 hover:text-indigo-500"
-          >
+          Don&rsquo;t have an account?
+          <Link to="/register" className="font-medium btn btn-link">
             Sign up
           </Link>
         </p>

@@ -5,25 +5,31 @@ import useAuth from "../../hooks/useAuth.jsx";
 import imageUpload from "../../utils/imageUpload.js";
 import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure.jsx";
 import useGetSecure from "../../hooks/axiosSecureApi/useGetSecure.jsx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader/Loader.jsx";
 import toast from "react-hot-toast";
+import SectionTitle from "../SectionTitle/SectionTitle.jsx";
 
-const EditProduct = ({data}) => {
-  const {id} = useParams()
+const EditProduct = ({ data }) => {
+  const { id } = useParams();
   const { user } = useAuth();
+  const goTo = useNavigate()
   const axiosSecure = useAxiosSecure();
   const [tags, setTags] = useState([]);
-  const {data:product,isLoading} = useGetSecure(`/products/${id}`,'product')
-useEffect(() => {
-  // Set default tags when the component mounts
-  if (product?.tags) {
-    setTags([...product.tags]);
+  const {
+    data: product,
+    isLoading,
+    refetch,
+  } = useGetSecure(`/products/${id}`, "product");
+  // useEffect(() => {
+  //   // Set default tags when the component mounts
+  //   if (product?.tags) {
+  //     setTags([ ...product.tags]);
+  //   }
+  // }, [product]);
+  if (isLoading) {
+    return <Loader></Loader>;
   }
-}, [product]);
-if(isLoading){
-  return <Loader></Loader>
-}
 
   const handleSubmit = async (e) => {
     try {
@@ -39,26 +45,29 @@ if(isLoading){
         externalLinks,
       } = Object.fromEntries(allInputData);
       const imageUploadResponse = await imageUpload(image_url);
-// update product
-        const UpdateProduct = {
-          name,
-          image_url: imageUploadResponse,
-          price,
-          description,
-          product_owner: user?.email,
-          category,
-          tags,
-          externalLinks,
-        };
 
-        const res = await axiosSecure.patch(
-          `/products/${product?._id}`,
-          UpdateProduct
-        );
-        console.log(res);
-        toast.success('update successful')
-        console.log(UpdateProduct);
-      
+      // update product
+      const updateProduct = {
+        name,
+        image_url: imageUploadResponse,
+        price,
+        description,
+        product_owner: user?.email,
+        category,
+        tags,
+        externalLinks,
+      };
+
+      const res = await axiosSecure.patch(
+        `/products/${product?._id}`,
+        updateProduct
+      );
+      console.log(res);
+      if (res.data.success) {
+        toast.success("update successful");
+        goTo('/dashboard/myProducts')
+        refetch();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -66,16 +75,26 @@ if(isLoading){
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8">
+      <SectionTitle title="Edit Product"></SectionTitle>
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-2xl rounded-lg bg-white p-5 shadow-2xl mx-auto mt-8"
+      >
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">
-            Product Owner Info <span className="text-red-500">*</span>
-          </label>
-          <div className="flex items-center justify-between">
-            <div className="w-24 mask mask-squircle">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <div className="flex justify-between">
+            <div>
+              <label className="block mb-2 text-xl font-medium text-gray-600">
+                Product image <span className="text-red-500">*</span>
+              </label>
+              <img width={250} src={product?.image_url} alt="" />
             </div>
             <div>
+              <div className="w-24 mask mask-squircle">
+                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+              <label className="block text-xl font-medium text-gray-600">
+                Product Owner Info <span className="text-red-500">*</span>
+              </label>
               <p>Name:{user?.displayName}</p>
               <p>Email:{user?.email}</p>
             </div>
@@ -122,7 +141,6 @@ if(isLoading){
             type="number"
             name="price"
             defaultValue={product?.price}
-      
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
@@ -137,7 +155,6 @@ if(isLoading){
             type="text"
             name="category"
             defaultValue={product?.category}
-     
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
@@ -152,7 +169,6 @@ if(isLoading){
           <textarea
             name="description"
             defaultValue={product?.description}
-     
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>

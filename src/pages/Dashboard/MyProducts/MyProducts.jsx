@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import Loader from "../../../shared/Loader/Loader";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
 import swal from "sweetalert";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 
 const MyProducts = () => {
   const { user } = useAuth();
@@ -19,7 +20,7 @@ const MyProducts = () => {
   }
 
   const handleDelete = async (id) => {
-    console.log(id);
+
     try {
       const willDelete = await swal({
         title: "Are you sure?",
@@ -45,7 +46,7 @@ const MyProducts = () => {
     }
   };
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto h-[80vh]">
       <table className="table table-md">
         <thead>
           <tr>
@@ -54,44 +55,46 @@ const MyProducts = () => {
             <th>status</th>
             <th>Up votes</th>
             <th>Edit</th>
-            <th>Delete</th>
             <th>View</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {products?.map((product, idx) => (
-            <tr key={product._id}>
-              <th>{idx + 1}</th>
-              <td>{product?.name}</td>
-              <td>{product?.status}</td>
-              <td>{product?.upVotes}</td>
-              <td>
-                {" "}
-                <Link
-                  className="btn"
-                  to={`/dashboard/editProduct/${product?._id}`}
-                >
-                  Edit
-                </Link>
-              </td>
-              <td>
-                <button
-                  className="btn"
-                  onClick={() => handleDelete(product?._id)}
-                >
-                  Delete
-                </button>
-              </td>
-              <td>
-                <Link
-                  className="btn"
-                  to={`/dashboard/productDetails/${product?._id}`}
-                >
-                  View
-                </Link>
-              </td>
-            </tr>
-          ))}
+          {products?.map((product, idx) => {
+            return (
+              <tr key={product._id}>
+                <th>{idx + 1}</th>
+                <td>{product?.name}</td>
+                <td>{product?.status}</td>
+                <td>{product?.upVotes}</td>
+                <td>
+                  <Link
+                    className="btn btn-sm"
+                    to={`/dashboard/editProduct/${product?._id}`}
+                  >
+                    <FaEdit className="h-5 w-5 text-secondary"></FaEdit>
+                  </Link>
+                </td>
+
+                <td>
+                  <Link
+                    className="btn btn-sm"
+                    to={`/dashboard/productDetails/${product?._id}`}
+                  >
+                    <FaEye className="h-5 w-5 text-secondary"></FaEye>
+                  </Link>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-sm"
+                    onClick={() => handleDelete(product?._id)}
+                  >
+                    <FaTrash color="red" />
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

@@ -150,17 +150,14 @@ const handleRegister = async (e) => {
               {/* <span>Remember me</span> */}
             </div>
           </div>
-          <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+          <button className="w-full px-4 py-2 text-white font-medium btn btn-primary active:bg-primary rounded-lg duration-150">
             Register
           </button>
         </form>
         <SocialLogin></SocialLogin>
         <p className="text-center">
           Already have an account?{" "}
-          <Link
-            to="/login"
-            className="font-medium text-indigo-600 hover:text-indigo-500"
-          >
+          <Link to="/login" className="font-medium btn btn-link">
             Login
           </Link>
         </p>

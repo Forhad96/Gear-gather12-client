@@ -1,4 +1,4 @@
-const SectionTitle = ({title, subTitle}) => {
+const SectionTitle = ({ title, subTitle }) => {
   return (
     <div>
       <h2 className="text-4xl text-center my-10">{title}</h2>

@@ -65,7 +65,7 @@ const AddReview = ({ productId, refetch }) => {
                 defaultValue={""}
                 name="comment"
               />
-              <button className="my-8 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 py-3 text-base text-white">
+              <button className="my-8 rounded-xl bg-gradient-to-r from-primary to-secondary hover:opacity-90 py-3 text-base text-white">
                 Rate now
               </button>
             </div>

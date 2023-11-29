@@ -38,7 +38,9 @@ const AddProduct = () => {
         const res = await axiosSecure.post("/products", product);
         toast.success("Product added successful");
         console.log(res.data);
-        console.log(product);
+
+        e.target.reset()
+        setTags([])
       }
     } catch (error) {
       console.log(error);
@@ -46,19 +48,23 @@ const AddProduct = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8">
+    <div className=" bg-white max-w-2xl mx-auto p-5 rounded-lg shadow-2xl">
+      <form onSubmit={handleSubmit} className="">
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">
-            Product Owner Info <span className="text-red-500">*</span>
-          </label>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col items-center justify-center gap-5">
             <div className="w-24 mask mask-squircle">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <img src={user?.photoURL} />
             </div>
-            <div>
-              <p>Name:{user?.displayName}</p>
-              <p>Email:{user?.email}</p>
+            <div className="space-y-2">
+              <label className="block text-center text-lm  border-b-4 font-medium text-gray-600">
+                Product Owner Info <span className="text-red-500">*</span>
+              </label>
+              <p className="block text-center text-sm font-medium text-gray-600">
+                Name: {user?.displayName}
+              </p>
+              <p className="block text-center text-sm font-medium text-gray-600">
+                Email:{user?.email}
+              </p>
             </div>
           </div>
         </div>
@@ -161,7 +167,7 @@ const AddProduct = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+            className="px-4 py-2 btn btn-primary text-white rounded-md  focus:outline-none focus:ring focus:border-blue-300"
           >
             Submit
           </button>

@@ -59,8 +59,9 @@
 -load report data form database and view reports data on view reports page
 -save user review to database
 -create api for get review 
+-**todo: close modal after successfully reported
 -display user review on product details page
--todo:moderator reported product delete functionality
+-moderator reported product delete functionality
 -todo:noProduct available page
 -todo:crate review page
 

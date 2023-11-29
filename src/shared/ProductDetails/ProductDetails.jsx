@@ -135,7 +135,7 @@ useEffect(()=>{
                   </svg>
                 </div>
                 <p className="ml-2 text-sm font-medium text-gray-500">
-                  1,209 Reviews
+                  12 Reviews
                 </p>
               </div>
 

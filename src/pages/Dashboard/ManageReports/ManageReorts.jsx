@@ -2,18 +2,59 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
 import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import { Link } from "react-router-dom";
+import Loader from "../../../shared/Loader/Loader";
+import swal from "sweetalert";
 const ManageReports = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: products } = useGetSecure(
-    "/allReportedProducts",
-    "allReportedProducts"
-  );
+  const {
+    data: products,
+    refetch,
+    isLoading,
+  } = useGetSecure("/allReportedProducts", "allReportedProducts");
 
-  const handleDelete = () => {};
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
+
+  const handleDelete = async (productId) => {
+
+
+
+try {
+  const willDelete = await swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this imaginary file!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  });
+  if (willDelete) {
+    const res = await axiosSecure.delete(`/allReportedProduct/${productId}`);
+    if (res.data.deletedCount > 0) {
+      swal("Poof! Your imaginary file has been deleted!", {
+        icon: "success",
+      });
+      refetch();
+    }
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+} catch (error) {
+  console.log(error);
+}
+
+
+
+
+
+
+
+
+  };
   const handleViewDetails = () => {};
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto h-[80vh]">
       <table className="table table-md table-zebra">
         <thead>
           <tr>
