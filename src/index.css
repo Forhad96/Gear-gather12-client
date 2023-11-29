@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+  a.active{
+background-color: #00999f !important;
+color: white !important;
+}
+ /* #aside a.active{
+background-color: #00999f !important;
+color: white !important;
+} */

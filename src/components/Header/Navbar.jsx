@@ -6,13 +6,14 @@ import { Link, NavLink } from "react-router-dom";
 import NavAvatar from "./NavAvatar";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../../shared/Loader/Loader";
+import Logo from "../../shared/Logo/Logo";
 const axiosPublic = axios.create({
   baseURL: "https://bookify-eight.vercel.app",
 });
 const Navbar = () => {
   const {user,loading} = useAuth()
   return (
-    <div className="navbar z-10 max-w-7xl mx-auto bg-base-100">
+    <nav id="navbar" className="navbar z-10 max-w-7xl mx-auto bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -38,7 +39,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">TechDunia</a>
+        <div className="btn btn-ghost text-xl"><Logo></Logo></div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
@@ -53,7 +54,7 @@ const Navbar = () => {
         <Link to='/login' className="btn">Register/Login</Link>
         }
       </div>
-    </div>
+    </nav>
   );
 };
 export default Navbar;

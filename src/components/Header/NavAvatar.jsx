@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 const NavAvatar = () => {
@@ -23,10 +24,10 @@ toast.success('Logout successful')
           className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li>
-            <a>FORHAD</a>
+            <a className="bg-neutral text-center text-white font-bold  mb-2">FORHAD</a>
           </li>
           <li>
-            <a>Dashboard</a>
+            <NavLink to='/dashboard'>Dashboard</NavLink>
           </li>
           <li>
             <a onClick={handleLogout}>Logout</a>

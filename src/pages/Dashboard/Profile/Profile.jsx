@@ -1,7 +1,11 @@
+import useAuth from "../../../hooks/useAuth";
+import Modal from "../../../shared/Modal/Modal";
+
 const Profile = () => {
+  const {user} = useAuth()
     return (
-      <div className="m-10 max-w-sm">
-        <div className="rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
+      <div className="m-10 max-w-sm mx-auto h-[70vh]">
+        <div className=" rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
           <div className="relative mx-auto w-36 rounded-full">
             <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2" />
             <img
@@ -11,10 +15,10 @@ const Profile = () => {
             />
           </div>
           <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-900">
-            Michael Simbal
+            {user?.displayName}
           </h1>
           <h3 className="font-lg text-semibold text-center leading-6 text-gray-600">
-            Marketing Exec. at Denva Corp
+           Email {user?.email}
           </h3>
           <p className="text-center text-sm leading-6 text-gray-500 hover:text-gray-600">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -25,7 +29,7 @@ const Profile = () => {
               <span>Status</span>
               <span className="ml-auto">
                 <span className="rounded-full bg-green-200 py-1 px-2 text-xs font-medium text-green-700">
-                  Open for side gigs
+                  Trusted
                 </span>
               </span>
             </li>
@@ -34,6 +38,12 @@ const Profile = () => {
               <span className="ml-auto">Apr 08, 2022</span>
             </li>
           </ul>
+        {/* subscription button */}
+        <div className="text-center mt-6">
+          <button onClick={() => document.getElementById("my_modal_3").showModal()} className="btn btn-primary text-white hover:btn-neutral">Subscribe</button>
+          <Modal></Modal>
+        </div>
+
         </div>
       </div>
     );

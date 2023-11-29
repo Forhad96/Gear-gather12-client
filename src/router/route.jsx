@@ -18,6 +18,7 @@ import EditProduct from "../shared/EditProduct/EditProduct";
 import PrivateRoute from "./PrivateRoute";
 import ManageReports from "../pages/Dashboard/ManageReports/ManageReorts";
 import ViewReports from "../pages/Dashboard/ManageReports/ViewReports";
+import AdminRoute from "./AdminRoute";
 
 const route = createBrowserRouter([
   {
@@ -53,9 +54,7 @@ const route = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-    
-      }
+      {},
     ],
   },
   {
@@ -86,9 +85,9 @@ const route = createBrowserRouter([
       {
         path: "manageProducts",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <ManageProducts></ManageProducts>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
@@ -109,7 +108,11 @@ const route = createBrowserRouter([
       },
       {
         path: "manageReports",
-        element: <ManageReports></ManageReports>,
+        element: (
+          <AdminRoute>
+            <ManageReports></ManageReports>
+          </AdminRoute>
+        ),
       },
       {
         path: "viewReports/:id",

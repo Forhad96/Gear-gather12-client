@@ -84,16 +84,16 @@ const ManageProducts = () => {
             <th className="border border-gray-300">Status</th>
             <th className="border border-gray-300">Featured Status</th>
             <th className="border border-gray-300 text-center">
-              View Details Button
+              View Details
             </th>
             <th className="border border-gray-300 text-center">
-              Make Featured Button
+              Make Featured
             </th>
             <th className="border border-gray-300 text-center">
-              Accept Button
+              Accept
             </th>
             <th className="border border-gray-300 text-center">
-              Reject Button
+              Reject
             </th>
           </tr>
         </thead>

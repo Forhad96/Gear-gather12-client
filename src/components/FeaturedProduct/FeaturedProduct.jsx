@@ -13,13 +13,12 @@ const FeaturedProduct = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <SectionTitle title="Featured Products"></SectionTitle>
+      {/* <SectionTitle title="Featured Products"></SectionTitle> */}
       {/* product card */}
-      <div className="grid lg:grid-cols-4 gap-5">
+      {/* <div className="grid lg:grid-cols-4 gap-5">
         {products?.map((product) => (
           <div key={product?._id} className="card  bg-base-100 shadow-xl">
             <figure>
-              {/* <img src={product?.image_url} alt={product?.name} /> */}
               <img
                 src="https://cdn.pixabay.com/photo/2023/11/21/04/12/chicken-8402334_1280.jpg"
                 alt="Shoes"
@@ -30,7 +29,7 @@ const FeaturedProduct = () => {
                 {product?.name}
                 <div className="badge badge-secondary">NEW</div>
               </h2>
-              {/* <p>{product?.description}</p> */}
+            
               <p>
                 Publish Date:{new Date(product?.created_at).toLocaleString()}
               </p>
@@ -44,53 +43,11 @@ const FeaturedProduct = () => {
               </div>
 
               <div className="flex items-center justify-between">
-                <button
-                  onClick={() => handleVote(product._id, "upvote")}
-                  type="button"
-                  className="bg-yellow-500 hover:bg-yellow-400 text-white px-2 py-1 rounded-full flex items-center"
-                  // To be enabled based on user login status and product ownership
-                >
-                  <span className="mr-2">{product?.upVotes}</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 15l7-7 7 7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => handleVote(product._id, "downvote")}
-                  className="bg-red-500 hover:bg-red-400 text-white px-2 py-1 rounded-full flex items-center ml-2"
-                  // To be enabled based on user login status and product ownership
-                >
-                  <span className="mr-2">{product?.downVotes}</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
+       
 
                 <button
                   className="bg-primary hover:bg-neutral text-white px-4 py-1 rounded-full"
-                  // To be enabled based on user login status and product ownership
+
                 >
                   <Link to={`/productDetails/${product?._id}`}>Details</Link>
                 </button>
@@ -98,7 +55,7 @@ const FeaturedProduct = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <section className="bg-white py-5 text-gray-700 sm:py-16 lg:py-10">
         <SectionTitle title="Featured Products"></SectionTitle>

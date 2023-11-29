@@ -4,7 +4,7 @@ const Contact = () => {
         <section className="mx-auto max-w-screen-xl md:rounded-md md:border md:shadow-lg">
           <div className="grid grid-cols-4 text-gray-800 lg:grid-cols-3">
             <div className="col-span-4 bg-gray-50 px-8 py-10 text-gray-800 md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
-              <h2 className="mb-8 text-2xl font-black">Contact me</h2>
+              <h2 className="mb-8 text-2xl font-black">Contact with us</h2>
               <ul>
                 <li className="mb-6 flex items-start text-left">
                   <svg
@@ -27,7 +27,7 @@ const Contact = () => {
                       className="cursor-pointer font-serif text-base md:text-lg"
                       href="#"
                     >
-                      abraham@microsoft.com
+                      Gear-gether@Gmail.com
                     </a>
                     <span className="block text-xs uppercase">email</span>
                   </div>
@@ -53,7 +53,7 @@ const Contact = () => {
                       className="cursor-pointer font-serif text-base md:text-lg"
                       href="#"
                     >
-                      abrahama.real
+                      Gear-gether
                     </a>
                     <span className="block text-xs uppercase">twitter</span>
                   </div>
@@ -77,7 +77,9 @@ const Contact = () => {
                     />
                   </svg>
                   <div>
-                    <p className="font-serif text-base md:text-lg">abraham</p>
+                    <p className="font-serif text-base md:text-lg">
+                      Gear-gether
+                    </p>
                     <span className="block text-xs uppercase">LinkedIn</span>
                   </div>
                 </li>
@@ -113,7 +115,7 @@ const Contact = () => {
                 />
                 <button
                   type="submit"
-                  className="group flex cursor-pointer items-center rounded-xl bg-blue-600 bg-none px-8 py-4 text-center font-semibold leading-tight text-white"
+                  className="group flex cursor-pointer items-center rounded-xl bg-primary bg-none px-8 py-4 text-center font-semibold leading-tight text-white"
                 >
                   Send
                   <svg

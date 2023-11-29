@@ -8,6 +8,7 @@ const useCheckRole = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [userInfo, setUerInfo] = useState({});
+  const [loading,setLoading] = useState(true)
   // if(user?.email){
   //   return
   // }
@@ -21,6 +22,7 @@ const useCheckRole = () => {
       const fetchData =async()=>{
    const res =await axiosSecure.get(`/users/checkRole/${user?.email}`)
    setUerInfo(res.data)
+   setLoading(false)
       }
 fetchData()
         
@@ -34,6 +36,6 @@ fetchData()
 
 
   // return { data, isLoading,isError } || {};
-  return {userInfo};
+  return {userInfo,loading};
 };
 export default useCheckRole;

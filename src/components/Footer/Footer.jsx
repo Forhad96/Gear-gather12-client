@@ -53,7 +53,7 @@ const Footer = () => {
               <div className="mb-4">
                 <input
                   type="email"
-                  className="focus:outline mb-2 block h-14 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="focus:outline mb-2 block h-12 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-primary"
                   placeholder="Enter your email"
                 />
                 <button className="block rounded-xl bg-primary hover:bg-neutral px-6 py-3 font-medium text-white">
@@ -65,7 +65,7 @@ const Footer = () => {
         </div>
         <div className="bg-gray-100">
           <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
-            <div className="">© 2022 BelAir | All Rights Reserved</div>
+            <div className="">© 2023 Forhad Hossain | All Rights Reserved</div>
             <div className="">
               <a className="" href="#">
                 Privacy Policy

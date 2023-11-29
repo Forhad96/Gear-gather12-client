@@ -5,6 +5,8 @@ import Report from "../../pages/Report/Report";
 import useCheckRole from "../../hooks/useCheckRole";
 import { useEffect, useState } from "react";
 import VoteButton from "../VoteButton/VoteButton";
+import Slider from "../Slider/Slider";
+import Review from "../../components/Reviews/Review";
 
 const ProductDetails = () => {
   const {userInfo} = useCheckRole()
@@ -58,12 +60,13 @@ useEffect(()=>{
             <div className="lg:col-span-3 lg:row-end-1">
               <div className="lg:flex lg:items-start">
                 <div className="lg:order-2 lg:ml-5">
-                  <div className="max-w-xl overflow-hidden rounded-lg">
-                    <img
+                  <div className="max-w-xl h-[300px] overflow-hidden rounded-lg">
+                    {/* <img
                       className="h-full w-full max-w-full object-cover"
                       src="https://cdn.pixabay.com/photo/2023/09/19/11/01/beach-8262340_1280.jpg"
                       alt=""
-                    />
+                    /> */}
+                    <Slider  images={images}></Slider>
                   </div>
                 </div>
               </div>
@@ -156,8 +159,9 @@ useEffect(()=>{
 
               {/* External Links */}
               <div className="mb-4">
-                <span className="mr-2">External Links:{product?.externalLinks}</span>
-
+                <span className="mr-2">
+                  External Links:{product?.externalLinks}
+                </span>
               </div>
               <div className=" flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
                 <div className="flex items-end">
@@ -165,7 +169,6 @@ useEffect(()=>{
                 </div>
                 {/* vote Button */}
                 <VoteButton product={product} refetch={refetch}></VoteButton>
-
 
                 {/* Report Button */}
                 <button
@@ -198,24 +201,8 @@ useEffect(()=>{
                   </a>
                 </nav>
               </div>
-              <div className="mt-8 flow-root sm:mt-12">
-                <h1 className="text-3xl font-bold">Delivered To Your Door</h1>
-                <p className="mt-4">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
-                  accusantium nesciunt fuga.
-                </p>
-                <h1 className="mt-8 text-3xl font-bold">
-                  From the Fine Farms of Brazil
-                </h1>
-                <p className="mt-4">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                  numquam enim facere.
-                </p>
-                <p className="mt-4">
-                  Amet consectetur adipisicing elit. Optio numquam enim facere.
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Dolore rerum nostrum eius facere, ad neque.
-                </p>
+              <div className="mt-0 flow-root sm:mt-12">
+                  <Review></Review>
               </div>
             </div>
           </div>
@@ -226,3 +213,36 @@ useEffect(()=>{
 };
 
 export default ProductDetails;
+
+  const images = [
+    {
+      img_url:
+        "https://cdn.pixabay.com/photo/2015/02/02/15/28/bar-621033_1280.jpg",
+      description: "Bar Scene",
+    },
+    {
+      img_url:
+        "https://cdn.pixabay.com/photo/2020/05/18/16/17/social-media-5187243_1280.png",
+      description: "Social Media Icons",
+    },
+    {
+      img_url:
+        "https://cdn.pixabay.com/photo/2016/03/27/22/04/camera-1284459_1280.jpg",
+      description: "Camera",
+    },
+    {
+      img_url:
+        "https://cdn.pixabay.com/photo/2018/04/27/03/51/technology-3353701_1280.jpg",
+      description: "Technology",
+    },
+    {
+      img_url:
+        "https://cdn.pixabay.com/photo/2018/01/18/19/06/time-3091031_1280.jpg",
+      description: "Time",
+    },
+    {
+      img_url:
+        "https://cdn.pixabay.com/photo/2016/11/23/14/37/blur-1853262_1280.jpg",
+      description: "Blur Background",
+    },
+  ];

@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
 import useCheckRole from "../../hooks/useCheckRole";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
+import Pagination from "../../shared/Pagination/Pagination";
 const Products = () => {
   const { user } = useAuth();
   const goTo = useNavigate();
@@ -78,20 +79,21 @@ const Products = () => {
               />
             </div>
           </div>
-          <select className="select select-bordered join-item">
+          {/* <select className="select select-bordered join-item">
             <option disabled>Filter</option>
             <option>Sci-fi</option>
             <option>Drama</option>
             <option>Action</option>
-          </select>
+          </select> */}
           <div className="indicator">
-            <span className="indicator-item badge badge-secondary">new</span>
+            {/* <span className="indicator-item badge badge-secondary">new</span> */}
             <button onClick={handleSearch} className="btn join-item">
               Search
             </button>
           </div>
         </div>
       </div>
+
 
       {/* product card */}
       <div className="grid lg:grid-cols-4 gap-5">
@@ -179,6 +181,9 @@ const Products = () => {
         ))}
       </div>
 
+
+<Pagination></Pagination>
+{/* rnsdofdfdlf */}
       <div className="mx-auto my-10 grid max-w-screen-xl gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
         <div className="mx-2 rounded-xl bg-gray-100" />
         <div className="group cursor mx-4 overflow-hidden rounded-2xl bg-white shadow-xl duration-200 hover:-translate-y-4">
