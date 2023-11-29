@@ -23,7 +23,7 @@ const {data:users,refetch} = useGetSecure('/users','users') //this hook get data
       }
     }
     return (
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto h-[80vh]">
         <table className="table">
           {/* head */}
           <thead>

@@ -2,10 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import useCheckRole from "../../hooks/useCheckRole";
 import { FaListAlt, FaUsersCog } from "react-icons/fa";
 import { TbAlertHexagonOff, TbReportAnalytics } from "react-icons/tb";
+import Loader from "../../shared/Loader/Loader";
 const Aside = () => {
-  const { userInfo: user } = useCheckRole();
+  const { userInfo: user ,loading} = useCheckRole();
 console.log(user.role);
-
+// if(loading){
+//   return <Loader></Loader>
+// }
   return (
     <aside
       id="aside"
@@ -40,11 +43,19 @@ console.log(user.role);
           </span>
         </button>
       </div>
+
       <div className="m-4">
         {/* Admin Link */}
-        {user?.role === "admin" && <>{adminLinks}</>}
-        {user?.role === "user" && <>{usersLInks}</>}
-        {user?.role === "moderator" && <>{moderatorLinks}</>}
+
+        {loading ? (
+          <Loader></Loader>
+        ) : (
+          <div>
+            {user?.role === "admin" && <>{adminLinks}</>}
+            {user?.role === "user" && <>{usersLInks}</>}
+            {user?.role === "moderator" && <>{moderatorLinks}</>}
+          </div>
+        )}
 
         <ul className="mb-4 flex flex-col gap-1">
           <li className="mx-3.5 mt-4 mb-2">

@@ -53,17 +53,11 @@
 -create api for featured product sort latest upload product first 
 -display featured product
 -create api for trending product sort by vote count
--todo:create trending product routes and components
--todo:load trending product data and display
-
-
-
-
-
-
-
--**todo:make manageProduct private routes 
--todo:load report data form database and view reports data on view reports page
+-create trending product routes and components
+-load trending product data and display
+-make manageProduct private routes 
+-load report data form database and view reports data on view reports page
+-save user review to database
 -todo:moderator reported product delete functionality
 -todo:noProduct available page
 -todo:crate review page

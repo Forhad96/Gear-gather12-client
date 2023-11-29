@@ -51,7 +51,7 @@ const Navbar = () => {
           
           user?.email?
           <NavAvatar></NavAvatar>:
-        <Link to='/login' className="btn">Register/Login</Link>
+        <Link to='/login' className="btn btn-primary text-white">Register/Login</Link>
         }
       </div>
     </nav>

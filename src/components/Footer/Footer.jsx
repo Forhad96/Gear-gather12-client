@@ -63,7 +63,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-100">
+        <div className="bg-white">
           <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
             <div className="">© 2023 Forhad Hossain | All Rights Reserved</div>
             <div className="">

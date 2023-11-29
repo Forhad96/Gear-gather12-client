@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import VoteButton from "../VoteButton/VoteButton";
 import Slider from "../Slider/Slider";
 import Review from "../../components/Reviews/Review";
+import AddReview from "../../pages/AddReview/AddReview";
 
 const ProductDetails = () => {
   const {userInfo} = useCheckRole()
@@ -66,12 +67,12 @@ useEffect(()=>{
                       src="https://cdn.pixabay.com/photo/2023/09/19/11/01/beach-8262340_1280.jpg"
                       alt=""
                     /> */}
-                    <Slider  images={images}></Slider>
+                    <Slider images={images}></Slider>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
+            <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
               <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">
                 {product?.name}
               </h1>
@@ -185,7 +186,7 @@ useEffect(()=>{
                 </Modal>
               </div>
             </div>
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-6">
               <div className="border-b border-gray-300">
                 <nav className="flex gap-4">
                   <a
@@ -201,8 +202,11 @@ useEffect(()=>{
                   </a>
                 </nav>
               </div>
-              <div className="mt-0 flow-root sm:mt-12">
+              <div className="mt-0  flow-root sm:mt-12">
+                <div className="flex items-center justify-center">
                   <Review></Review>
+                  <AddReview productId={product._id}></AddReview>
+                </div>
               </div>
             </div>
           </div>

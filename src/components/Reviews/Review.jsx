@@ -33,13 +33,13 @@ const Review = ({ reviews }) => {
                     {review?.author}
                   </h2>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Web Designer
+                    Email:abc@gamil.com
                   </p>
                 </div>
               </div>
               <p className="px-6 text-base font-medium text-gray-600 dark:text-gray-400">
                 {" "}
-                Joined 12, SEP , 2022
+                 12, SEP , 2022
               </p>
             </div>
             <p className="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
