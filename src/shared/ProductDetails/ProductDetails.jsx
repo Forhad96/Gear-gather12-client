@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import VoteButton from "../VoteButton/VoteButton";
 import Slider from "../Slider/Slider";
 import Review from "../../components/Reviews/Review";
-import AddReview from "../../pages/AddReview/AddReview";
+
 
 const ProductDetails = () => {
   const {userInfo} = useCheckRole()
@@ -192,20 +192,16 @@ useEffect(()=>{
                   <a
                     href="#"
                     title=""
-                    className="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium text-gray-600"
+                    className="inline-flex items-center border-b-2 border-transparent py-4 text-xl font-medium text-gray-600"
                   >
                     Reviews
-                    <span className="ml-2 block rounded-full bg-gray-500 px-2 py-px text-xs font-bold text-gray-100">
-                      {" "}
-                      1,209{" "}
-                    </span>
                   </a>
                 </nav>
               </div>
               <div className="mt-0  flow-root sm:mt-12">
                 <div className="flex items-center justify-center">
-                  <Review></Review>
-                  <AddReview productId={product._id}></AddReview>
+                  <Review productId={product?._id}></Review>
+                
                 </div>
               </div>
             </div>

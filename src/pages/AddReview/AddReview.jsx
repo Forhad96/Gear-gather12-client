@@ -3,15 +3,15 @@ import useAuth from "../../hooks/useAuth";
 import ReactStarsRating from "react-awesome-stars-rating";
 import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
 import toast from "react-hot-toast";
-const AddReview = ({productId}) => {
+const AddReview = ({ productId, refetch }) => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const [rating, setRating] = useState(0);
   // {author, email;productId;createdAt;rating;profession;}
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
-try {
+    try {
       const comment = e.target.comment.value;
       const review = {
         author: user?.displayName,
@@ -21,23 +21,19 @@ try {
         rating,
       };
       // sent ratings to store database
-      const res = await axiosSecure.post('/reviews',review)
-      if(res.data.success){
-        toast.success('successfully posted review')
+      const res = await axiosSecure.post("/reviews", review);
+      if (res.data.success) {
+        toast.success("successfully posted review");
+        refetch()
       }
-  console.log(res);
-} catch (error) {
-  console.log(error);
-  
-}
-
-    
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  console.log(productId);
   return (
     <>
-      <div className="max-w-md py-3 px-3 sm:mx-auto">
+      <div className="max-w-md px-3 sm:mx-auto">
         <div className="flex flex-col rounded-xl bg-slate-200 shadow-lg">
           <div className="px-12 py-5">
             <h2 className="whitespace-nowrap text-center font-semibold text-gray-800 sm:text-xl">
@@ -83,5 +79,11 @@ try {
       </div>
     </>
   );
+};
+
+import PropTypes from 'prop-types';
+
+AddReview.propTypes = {
+  productId: PropTypes.string,
 };
 export default AddReview;

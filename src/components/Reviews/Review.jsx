@@ -2,19 +2,22 @@
 
 import ReactStarsRating from "react-awesome-stars-rating";
 import PropTypes, { array } from "prop-types";
-const Review = ({ reviews }) => {
-  // const axios = useAxios()
-  // const {data} = useQuery({
-  //   queryKey:["reviews"],
-  //   queryFn:async()=>{
-  //     const res = await axios.get('/')
-  //   }
-  // })
+import useGetPublicData from "../../hooks/axiosPublicApi/useGetPublicData";
+import AddReview from "../../pages/AddReview/AddReview";
+import NoReview from "./NoReview";
+import Loader from "../../shared/Loader/Loader";
+const Review = ({ productId }) => {
+  const {data:reviews,refetch,isLoading} = useGetPublicData(`/reviews/${productId}`,"reviews")
+if(isLoading){
+  return <Loader></Loader>
+}
 
   return (
-    <section className="  py-2 font-poppins dark:bg-gray-800">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 ">
-        {[1, 2, 3, 4]?.map((review, idx) => (
+    <section className=" flex justify-center py-2 font-poppins dark:bg-gray-800">
+      {
+        reviews?
+              <div className="grid grid-cols-1 h-32 gap-6 lg:grid-cols-2 ">
+        {reviews?.map((review, idx) => (
           <div
             key={idx}
             className="py-6 bg-white rounded-md shadow dark:bg-gray-900"
@@ -39,7 +42,7 @@ const Review = ({ reviews }) => {
               </div>
               <p className="px-6 text-base font-medium text-gray-600 dark:text-gray-400">
                 {" "}
-                 12, SEP , 2022
+                Publish Date:{new Date(review?.created_at).toLocaleString()}
               </p>
             </div>
             <p className="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
@@ -50,6 +53,7 @@ const Review = ({ reviews }) => {
                 <ReactStarsRating
                   size={20}
                   className="flex me-2"
+                  isEdit={false}
                   value={review?.rating}
                 ></ReactStarsRating>
                 <h2 className="text-sm text-gray-500 dark:text-gray-400">
@@ -96,12 +100,16 @@ const Review = ({ reviews }) => {
             </div>
           </div>
         ))}
-      </div>
+      </div>:
+      <NoReview></NoReview>
+      }
+
+      <AddReview refetch={refetch} productId={productId}></AddReview>
     </section>
   );
 };
 
 Review.propTypes = {
-  reviews: PropTypes.array,
+  productId: PropTypes.string,
 };
 export default Review;

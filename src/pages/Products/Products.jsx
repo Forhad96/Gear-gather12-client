@@ -8,6 +8,7 @@ import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
 import useCheckRole from "../../hooks/useCheckRole";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import Pagination from "../../shared/Pagination/Pagination";
+import VoteButton from "../../shared/VoteButton/VoteButton";
 const Products = () => {
   const { user } = useAuth();
   const goTo = useNavigate();
@@ -43,26 +44,26 @@ const Products = () => {
     }
   };
 
-  const handleVote = async (product_id, vote) => {
-    try {
-      console.log("click");
-      // const voteInfo = { action: vote,userId:userInfo?.userId };
+  // const handleVote = async (product_id, vote) => {
+  //   try {
+  //     console.log("click");
+  //     // const voteInfo = { action: vote,userId:userInfo?.userId };
 
-      if (user?.email && userInfo?.userId) {
-        const res = await axiosSecure.post(
-          `/votes/${product_id}/${userInfo.userId}/?action=${vote}`
-        );
-        if (res.data.success) {
-          refetch();
-        }
-        console.log(res);
-      } else {
-        goTo("/login");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     if (user?.email && userInfo?.userId) {
+  //       const res = await axiosSecure.post(
+  //         `/votes/${product_id}/${userInfo.userId}/?action=${vote}`
+  //       );
+  //       if (res.data.success) {
+  //         refetch();
+  //       }
+  //       console.log(res);
+  //     } else {
+  //       goTo("/login");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -87,7 +88,7 @@ const Products = () => {
           </select> */}
           <div className="indicator">
             {/* <span className="indicator-item badge badge-secondary">new</span> */}
-            <button onClick={handleSearch} className="btn join-item">
+            <button onClick={handleSearch} className="btn btn-primary text-white join-item">
               Search
             </button>
           </div>
@@ -98,7 +99,7 @@ const Products = () => {
       {/* product card */}
       <div className="grid lg:grid-cols-4 gap-5">
         {products?.map((product) => (
-          <div key={product?._id} className="card  bg-base-100 shadow-xl">
+          <div key={product?._id} className="card bg-white shadow-xl">
             <figure>
               {/* <img src={product?.image_url} alt={product?.name} /> */}
               <img
@@ -109,7 +110,7 @@ const Products = () => {
             <div className="card-body">
               <h2 className="card-title justify-between">
                 {product?.name}
-                <div className="badge badge-secondary">NEW</div>
+                <div className="badge badge-primary text-white">NEW</div>
               </h2>
               {/* <p>{product?.description}</p> */}
               <p>
@@ -125,7 +126,7 @@ const Products = () => {
               </div>
 
               <div className="flex items-center justify-between">
-                <button
+                {/* <button
                   onClick={() => handleVote(product._id, "upvote")}
                   type="button"
                   className="bg-yellow-500 hover:bg-yellow-400 text-white px-2 py-1 rounded-full flex items-center"
@@ -167,11 +168,11 @@ const Products = () => {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
-                </button>
-
+                </button> */}
+<VoteButton product={product} refetch={refetch}></VoteButton>
                 <button
-                  className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-1 rounded-full"
-                  // To be enabled based on user login status and product ownership
+                  className="bg-primary hover:bg-neutral text-white px-4 py-1 rounded-full"
+          
                 >
                   <Link to={`/productDetails/${product?._id}`}>Details</Link>
                 </button>
