@@ -42,6 +42,7 @@ const Profile = () => {
         <div className="text-center mt-6">
           <button onClick={() => document.getElementById("my_modal_3").showModal()} className="btn btn-primary text-white hover:btn-neutral">Subscribe</button>
           <Modal></Modal>
+         
         </div>
 
         </div>

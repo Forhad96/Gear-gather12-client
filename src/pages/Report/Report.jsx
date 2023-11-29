@@ -56,7 +56,7 @@ const Report = ({productId}) => {
           ></textarea>
         </div>
         <div className="form-control mt-6">
-          <button type="submit" className="btn btn-primary">submit</button>
+          <button type="submit" className="btn btn-primary text-white">submit</button>
         </div>
       </form>
     );

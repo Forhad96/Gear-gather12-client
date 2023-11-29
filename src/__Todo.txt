@@ -62,8 +62,9 @@
 -**todo: close modal after successfully reported
 -display user review on product details page
 -moderator reported product delete functionality
--todo:noProduct available page
--todo:crate review page
+-noProduct available page
+-crate review page
+-todo:create a modal for payment
 
 
 
