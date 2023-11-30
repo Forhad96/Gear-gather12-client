@@ -19,6 +19,8 @@ import PrivateRoute from "./PrivateRoute";
 import ManageReports from "../pages/Dashboard/ManageReports/ManageReorts";
 import ViewReports from "../pages/Dashboard/ManageReports/ViewReports";
 import AdminRoute from "./AdminRoute";
+import Coupons from "../pages/Dashboard/Coupons/Coupons";
+import AddCoupon from "../pages/Dashboard/Coupons/AddCoupon";
 
 const route = createBrowserRouter([
   {
@@ -117,9 +119,25 @@ const route = createBrowserRouter([
       {
         path: "viewReports/:id",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <ViewReports></ViewReports>
-          </PrivateRoute>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "coupons",
+        element: (
+          <AdminRoute>
+            <Coupons></Coupons>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addCoupon",
+        element: (
+          <AdminRoute>
+            <AddCoupon></AddCoupon>
+          </AdminRoute>
         ),
       },
     ],

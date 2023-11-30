@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import useCheckRole from "../../hooks/useCheckRole";
 import { FaListAlt, FaPlus, FaProductHunt, FaUserCircle, FaUsersCog } from "react-icons/fa";
 import { TbAlertHexagonOff, TbReportAnalytics } from "react-icons/tb";
+import { MdOutlineDiscount } from "react-icons/md";
 import Loader from "../../shared/Loader/Loader";
 const Aside = () => {
   const { userInfo: user ,loading} = useCheckRole();
@@ -163,6 +164,19 @@ const adminLinks = (
           <FaUsersCog className="w-5 h-5"></FaUsersCog>
           <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
             Manage Users
+          </p>
+        </button>
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="/dashboard/coupons" className="">
+        <button
+          className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+          type="button"
+        >
+          <MdOutlineDiscount className="w-5 h-5"></MdOutlineDiscount>
+          <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+            Coupons
           </p>
         </button>
       </NavLink>

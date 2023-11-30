@@ -64,15 +64,20 @@
 -moderator reported product delete functionality
 -noProduct available page
 -crate review page
--todo:create a modal for payment
+-create a modal for payment
+-create readme.md file
+-disable vote button for product owner
+-disable vote button after vote
+-create coupon form 
+-todo-create api for coupon save database
+-todo: create api for get coupon 
+-todo: create table for display available coupon
+-todo: create api for delete coupon
+ 
 
 
 
 -todo:product pagination-
--todo-create readme.md file
--todo:disable vote button for product owner
--todo:disable vote button after vote
- 
 
 
 
