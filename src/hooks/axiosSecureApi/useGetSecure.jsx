@@ -3,7 +3,7 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "../useAuth";
 
 const useGetSecure = (endpoint, key) => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const res = useQuery({
     queryKey: [key],

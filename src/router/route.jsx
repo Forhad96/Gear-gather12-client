@@ -133,7 +133,7 @@ const route = createBrowserRouter([
         ),
       },
       {
-        path: "addCoupon",
+        path: " addCoupon",
         element: (
           <AdminRoute>
             <AddCoupon></AddCoupon>

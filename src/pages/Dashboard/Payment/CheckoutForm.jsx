@@ -2,27 +2,30 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
+import isCouponValid from "../../../utils/isCouponValid";
+import toast from "react-hot-toast";
 
 const CheckOutForm = () => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const [transactionId,setTransactionId] = useState("")
-const [price, setPrice] = useState(200); // Replace with your dynamic subscription amount
-const [couponCode, setCouponCode] = useState("");
-
+  const [transactionId, setTransactionId] = useState("");
+  const [price, setPrice] = useState(200); //  your dynamic subscription amount
+  const [couponCode, setCouponCode] = useState("");
+  const [couponApplied, setCouponApplied] = useState(false);
+  const { data: coupons } = useGetSecure("/coupons", "coupons");
 
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
 
-
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", { price: price }).then((res) => {
       console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
-  }, [axiosSecure,price]);
+  }, [axiosSecure, price]);
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -54,9 +57,8 @@ const [couponCode, setCouponCode] = useState("");
       }
 
       // confirm payment
-      const { paymentIntent, error:confirmError } = await stripe.confirmCardPayment(
-        clientSecret,
-        {
+      const { paymentIntent, error: confirmError } =
+        await stripe.confirmCardPayment(clientSecret, {
           payment_method: {
             card: card,
             billing_details: {
@@ -64,15 +66,14 @@ const [couponCode, setCouponCode] = useState("");
               email: user?.email || "anonymous",
             },
           },
-        }
-      );
+        });
       if (confirmError) {
         console.log("confirmError");
       } else {
         console.log("paymentIntent", paymentIntent);
-        if(paymentIntent.status === 'succeeded'){
+        if (paymentIntent.status === "succeeded") {
           console.log(paymentIntent.id);
-          setTransactionId(paymentIntent.id)
+          setTransactionId(paymentIntent.id);
         }
       }
     } catch (error) {
@@ -80,18 +81,33 @@ const [couponCode, setCouponCode] = useState("");
     }
   };
 
+  const handleApplyCoupon = () => {
+    try {
+      if (!couponApplied) {
+        const couponStatus = isCouponValid(couponCode, coupons);
 
+        if (couponStatus) {
+          const matchedCoupon = coupons.find(
+            (c) => c.couponCode === couponCode
+          );
+          const discount = matchedCoupon.discountAmount;
 
+          // Update price only if the coupon has not been applied yet
+          setPrice(price - discount);
 
-   const handleApplyCoupon = () => {
-     // Add logic to apply the coupon code and update the price
-     // For simplicity, this example just reduces the price by 50% for a hypothetical coupon code "HALFOFF"
-     if (couponCode === "HALFOFF") {
-       setPrice(price / 2);
-     } else {
-       setError("Invalid coupon code");
-     }
-   };
+          // Mark the coupon as applied
+          setCouponApplied(true);
+
+          toast.success("Successfully applied coupon");
+          setError(null);
+        }
+      } else {
+        toast.error("Coupon has already been applied");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   return (
     <form
       className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md"
@@ -129,7 +145,6 @@ const [couponCode, setCouponCode] = useState("");
 
       <div className="mb-4 border rounded-md py-3 px-2 border-primary">
         <CardElement
-          
           options={{
             style: {
               base: {

@@ -1,3 +1,4 @@
+import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import useAuth from "../../../hooks/useAuth";
 import useCheckRole from "../../../hooks/useCheckRole";
 import Modal from "../../../shared/Modal/Modal";
@@ -7,6 +8,8 @@ const Profile = () => {
   const {user} = useAuth()
   const {userInfo} = useCheckRole()
   console.log(userInfo);
+const { data: coupons } = useGetSecure(`/coupons`,'coupons');
+console.log(coupons);
     return (
       <div className="m-10 max-w-sm mx-auto h-[70vh]">
         <div className=" rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
