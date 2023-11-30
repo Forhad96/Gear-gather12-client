@@ -60,9 +60,9 @@
 // };
 // export default AddCoupon;
 
-
-
 import { useState } from "react";
+import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const AddCoupon = () => {
   const [couponCode, setCouponCode] = useState("");
@@ -70,14 +70,22 @@ const AddCoupon = () => {
   const [description, setDescription] = useState("");
   const [discountAmount, setDiscountAmount] = useState("");
   const [error, setError] = useState("");
-console.log(couponCode,expiryDate,description,discountAmount);
-  const handleSubmit = (e) => {
+  const axiosSecure = useAxiosSecure();
+  console.log(couponCode,expiryDate,description,discountAmount);
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form fields here
+    const coupon = { couponCode, expiryDate, description, discountAmount };
+    try {
+      const response = await axiosSecure.post("/coupons",coupon);
+      toast.success("Operation successful");
+      console.log(response);
 
-    // Add logic to handle the coupon submission
-    // For example, you can send the coupon details to the server
+      return response.data;
+    } catch (error) {
+      toast.error(error);
+      throw error;
+    }
   };
 
   return (
@@ -111,7 +119,7 @@ console.log(couponCode,expiryDate,description,discountAmount);
             Expiry Date
           </label>
           <input
-            type="text"
+            type="date"
             id="expiryDate"
             className="input input-primary input-md w-full"
             placeholder="Enter expiry date"
