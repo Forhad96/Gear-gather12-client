@@ -66,7 +66,7 @@ const FeaturedProduct = () => {
                 <figure>
                   {/* <img src={product?.image_url} alt={product?.name} /> */}
                   <img
-                    src="https://cdn.pixabay.com/photo/2023/11/21/04/12/chicken-8402334_1280.jpg"
+                    src="https://cdn.pixabay.com/photo/2015/01/20/13/13/samsung-605439_1280.jpg"
                     alt="Shoes"
                   />
                 </figure>

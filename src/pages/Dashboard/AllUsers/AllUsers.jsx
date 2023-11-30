@@ -5,7 +5,7 @@ import useAxiosSecure from '../../../hooks/axiosSecureApi/useAxiosSecure';
 import toast from 'react-hot-toast'
 const AllUsers = () => {
 const axiosSecure = useAxiosSecure()
-const {data:users,refetch} = useGetSecure('/users','users') //this hook get data endpoints,query key
+const {data:users,refetch} = useGetSecure('/users','manageUsers') //this hook get data endpoints,query key
 
 
 
@@ -13,10 +13,11 @@ const {data:users,refetch} = useGetSecure('/users','users') //this hook get data
       console.log(id,role);
       try {
         const res = await axiosSecure.put(`/users/${id}`,{"role":role})
-        if(res.data.modifiedCount > 0){
-          toast.success('user role update successful')
+        if(res.data.result.modifiedCount > 0){
+          toast.success('User role update successful')
           refetch()
         }
+        console.log(res);
       } catch (error) {
         console.log(error);
         
@@ -45,13 +46,13 @@ const {data:users,refetch} = useGetSecure('/users','users') //this hook get data
                 <td className="text-center">
                   <button
                     onClick={() => handleRoleUpdate(user._id, "admin")}
-                    className="btn btn-sm"
+                    className="btn btn-sm btn-primary text-white"
                   >
                     Make Admin
                   </button>
                   <button
                     onClick={() => handleRoleUpdate(user._id, "moderator")}
-                    className="btn btn-sm ml-2"
+                    className="btn btn-sm btn-primary text-white ml-2"
                   >
                     Make Moderator
                   </button>

@@ -70,9 +70,9 @@
 -disable vote button after vote
 -create coupon form 
 -create api for coupon save database
--todo: create api for get coupon 
+-create api for get coupon 
+-create api for delete coupon
 -todo: create table for display available coupon
--todo: create api for delete coupon
  
 
 

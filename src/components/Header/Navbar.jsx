@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import ThemeController from "./ThemeController";
 
 import { Link, NavLink } from "react-router-dom";
@@ -7,9 +6,7 @@ import NavAvatar from "./NavAvatar";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../../shared/Loader/Loader";
 import Logo from "../../shared/Logo/Logo";
-const axiosPublic = axios.create({
-  baseURL: "https://bookify-eight.vercel.app",
-});
+
 const Navbar = () => {
   const {user,loading} = useAuth()
   return (
@@ -70,9 +67,5 @@ const links = (
     <li>
       <NavLink to='/contact'>Contact</NavLink>
     </li>
-    <li>
-      <NavLink to='/dashboard'>Dashboard</NavLink>
-    </li>
-
   </>
 );

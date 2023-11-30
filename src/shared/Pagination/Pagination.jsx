@@ -92,7 +92,7 @@ const Pagination = () => {
   return (
     <nav
       aria-label="Page Navigation"
-      className="mx-auto my-10 flex max-w-md justify-between space-x-2 rounded-md bg-white py-2"
+      className="mx-auto my-10 flex max-w-md justify-between space-x-2 rounded-md py-2"
     >
       <a
         href="#"
