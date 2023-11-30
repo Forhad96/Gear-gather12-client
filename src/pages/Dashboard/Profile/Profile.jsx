@@ -1,8 +1,12 @@
 import useAuth from "../../../hooks/useAuth";
+import useCheckRole from "../../../hooks/useCheckRole";
 import Modal from "../../../shared/Modal/Modal";
+import Payment from "../Payment/Payment";
 
 const Profile = () => {
   const {user} = useAuth()
+  const {userInfo} = useCheckRole()
+  console.log(userInfo);
     return (
       <div className="m-10 max-w-sm mx-auto h-[70vh]">
         <div className=" rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
@@ -18,7 +22,7 @@ const Profile = () => {
             {user?.displayName}
           </h1>
           <h3 className="font-lg text-semibold text-center leading-6 text-gray-600">
-           Email {user?.email}
+            Email {user?.email}
           </h3>
           <p className="text-center text-sm leading-6 text-gray-500 hover:text-gray-600">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -38,13 +42,21 @@ const Profile = () => {
               <span className="ml-auto">Apr 08, 2022</span>
             </li>
           </ul>
-        {/* subscription button */}
-        <div className="text-center mt-6">
-          <button onClick={() => document.getElementById("my_modal_3").showModal()} className="btn btn-primary text-white hover:btn-neutral">Subscribe</button>
-          <Modal></Modal>
-         
-        </div>
+          {/* subscription button */}
+          <div className="text-center mt-6">
+            {userInfo?.subscription === 'free' &&
 
+            <button
+              onClick={() => document.getElementById("my_modal_3").showModal()}
+              className="btn btn-primary text-white hover:btn-neutral"
+            >
+              Subscribe
+            </button>
+            }
+            <Modal>
+              <Payment></Payment>
+            </Modal>
+          </div>
         </div>
       </div>
     );
