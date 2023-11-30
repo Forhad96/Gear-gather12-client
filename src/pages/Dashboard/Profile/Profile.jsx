@@ -7,9 +7,8 @@ import Payment from "../Payment/Payment";
 const Profile = () => {
   const {user} = useAuth()
   const {userInfo} = useCheckRole()
-  console.log(userInfo);
-const { data: coupons } = useGetSecure(`/coupons`,'coupons');
-console.log(coupons);
+  
+
     return (
       <div className="m-10 max-w-sm mx-auto h-[70vh]">
         <div className=" rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
@@ -36,7 +35,7 @@ console.log(coupons);
               <span>Status</span>
               <span className="ml-auto">
                 <span className="rounded-full bg-green-200 py-1 px-2 text-xs font-medium text-green-700">
-                  Trusted
+                  {userInfo?.subscription === "premium"? 'Verified':'Normal user'}
                 </span>
               </span>
             </li>
@@ -47,15 +46,16 @@ console.log(coupons);
           </ul>
           {/* subscription button */}
           <div className="text-center mt-6">
-            {userInfo?.subscription === 'free' &&
-
-            <button
-              onClick={() => document.getElementById("my_modal_3").showModal()}
-              className="btn btn-primary text-white hover:btn-neutral"
-            >
-              Subscribe
-            </button>
-            }
+            {userInfo?.subscription === "free" && (
+              <button
+                onClick={() =>
+                  document.getElementById("my_modal_3").showModal()
+                }
+                className="btn btn-primary text-white hover:btn-neutral"
+              >
+                Subscribe
+              </button>
+            )}
             <Modal>
               <Payment></Payment>
             </Modal>

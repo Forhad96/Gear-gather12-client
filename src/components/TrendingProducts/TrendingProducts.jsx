@@ -17,8 +17,8 @@ const TrendingProducts = () => {
             >
               <a href="#">
                 <img
-                  className="h-60 rounded-t-lg object-cover"
-                  src="https://media.istockphoto.com/id/1281696939/photo/blue-armchair-isolated-on-a-white.webp?s=1024x1024&w=is&k=20&c=0uacw2YjpVkx6pMbEgDQaG7Ahk5Dt-4p9TNHb-1bdhs="
+                  className="h-60 w-full rounded-t-lg object-cover"
+                  src={product?.image_url}
                   alt="product image"
                 />
               </a>

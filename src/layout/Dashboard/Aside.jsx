@@ -6,10 +6,7 @@ import { MdOutlineDiscount } from "react-icons/md";
 import Loader from "../../shared/Loader/Loader";
 const Aside = () => {
   const { userInfo: user ,loading} = useCheckRole();
-console.log(user.role);
-// if(loading){
-//   return <Loader></Loader>
-// }
+
   return (
     <aside
       id="aside"

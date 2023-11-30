@@ -65,10 +65,7 @@ const FeaturedProduct = () => {
               <article key={product?._id} className="relative">
                 <figure>
                   {/* <img src={product?.image_url} alt={product?.name} /> */}
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/01/20/13/13/samsung-605439_1280.jpg"
-                    alt="Shoes"
-                  />
+                  <img className="h-[210px] w-full" src={product?.image_url} alt="" />
                 </figure>
                 <div className="absolute top-0 m-1 rounded-full bg-white">
                   <p className="text-[10px] rounded-full bg-primary p-1 font-bold uppercase tracking-wide text-white sm:px-3 sm:py-1">

@@ -3,7 +3,9 @@
 # Gear Gather
 
 Gear Gather is a dynamic platform that empowers users to explore, contribute, and interact with a diverse array of products. Whether you're a user searching for the latest gear or an admin managing the platform, Gear Gather has you covered.
+## Live Project
 
+Check out the live project here: [Gear-gather](https://gear-gather07.web.app)
 ## Features
 
 - **User Authentication System:**
@@ -53,7 +55,8 @@ Gear Gather is a dynamic platform that empowers users to explore, contribute, an
 
 1. Clone the repository.
    ```bash
-   git clone https://github.com/your-username/gear-gather.git
+   git clone  https://github.com/programming-hero-web-course1/b8a12-client-side-Forhad96
+   git clone  https://github.com/programming-hero-web-course1/b8a12-server-side-Forhad96
    ```
 
 2. Navigate to the project directory.
@@ -73,7 +76,7 @@ Gear Gather is a dynamic platform that empowers users to explore, contribute, an
    npm start
    ```
 
-6. Visit `http://localhost:3000` to explore Gear Gather locally.
+6. Visit `http://localhost:5000` to explore Gear Gather locally.
 
 ## Project Structure
 
@@ -81,8 +84,15 @@ Gear Gather is a dynamic platform that empowers users to explore, contribute, an
 gear-gather/
 |-- frontend/
 |   |-- src/
+|   |   |-- assets/
 |   |   |-- components/
+|   |   |-- config/
+|   |   |-- hooks/
+|   |   |-- layout/
 |   |   |-- pages/
+|   |   |-- provider/
+|   |   |-- router/
+|   |   |-- shared/
 |   |   |-- utils/
 |   |   |-- App.js
 |   |   |-- index.js

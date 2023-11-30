@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [disabled,setDisable] = useState(false)
   const { data: product,refetch } = useGetSecure(`/products/${id}`, "singleProduct");
-
+console.log(product.tags);
 useEffect(()=>{
   if (
     userInfo?.role === "admin" ||
@@ -143,7 +143,7 @@ useEffect(()=>{
               <p className="text-gray-700 mb-4">{product?.description}</p>
               <h2 className="mt-8 text-base text-gray-900">Tags:</h2>
               <div className="mt-3 flex select-none flex-wrap items-center gap-1">
-                {product?.tags?.map((tag, index) => (
+                {product?.tags.map((tag, index) => (
                   <label key={index} className="">
                     <input
                       type="radio"
@@ -216,33 +216,88 @@ export default ProductDetails;
 
   const images = [
     {
-      img_url:
-        "https://cdn.pixabay.com/photo/2015/02/02/15/28/bar-621033_1280.jpg",
-      description: "Bar Scene",
+      image_url:
+        "https://cdn.pixabay.com/photo/2015/06/25/17/22/smart-watch-821559_1280.jpg",
+      description: "Smart Watch",
     },
     {
-      img_url:
-        "https://cdn.pixabay.com/photo/2020/05/18/16/17/social-media-5187243_1280.png",
-      description: "Social Media Icons",
+      image_url:
+        "https://images.unsplash.com/photo-1590658006821-04f4008d5717?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description: "Wireless Earbuds",
     },
     {
-      img_url:
-        "https://cdn.pixabay.com/photo/2016/03/27/22/04/camera-1284459_1280.jpg",
-      description: "Camera",
+      image_url:
+        "https://images.unsplash.com/photo-1661254454741-94b4f0e6ebbb?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description: "Smart Bulb",
     },
     {
-      img_url:
-        "https://cdn.pixabay.com/photo/2018/04/27/03/51/technology-3353701_1280.jpg",
-      description: "Technology",
+      image_url:
+        "https://plus.unsplash.com/premium_photo-1681433383783-661b519b154a?q=80&w=1460&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description: "Fitness Tracker",
     },
     {
-      img_url:
-        "https://cdn.pixabay.com/photo/2018/01/18/19/06/time-3091031_1280.jpg",
-      description: "Time",
+      image_url:
+        "https://images.unsplash.com/photo-1623875151988-83a83a375cd4?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description: "Wireless Keyboard",
     },
     {
-      img_url:
-        "https://cdn.pixabay.com/photo/2016/11/23/14/37/blur-1853262_1280.jpg",
-      description: "Blur Background",
+      image_url:
+        "https://cdn.pixabay.com/photo/2018/01/17/09/43/iphone-3087842_1280.jpg",
+      description: "Smart Display",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2020/09/03/15/32/wireless-charger-5541662_1280.png",
+      description: "Wireless Charger",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2019/12/21/10/29/fitness-band-4710206_1280.jpg",
+      description: "Fitness Tracker",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2017/02/10/14/10/virtual-2055227_1280.png",
+      description: "VR Headset",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2017/01/24/18/26/smart-home-2006026_1280.png",
+      description: "Smart Thermostat",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2013/02/01/23/54/sweden-77216_1280.jpg",
+      description: "Wireless Security Camera",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2014/02/28/11/55/bell-276831_1280.jpg",
+      description: "Smart Doorbell",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2016/02/02/20/42/reading-1176073_1280.jpg",
+      description: "eReader",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2018/01/24/17/33/light-bulb-3104355_1280.jpg",
+      description: "Smart Plug",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2021/01/09/12/30/speaker-5902204_1280.jpg",
+      description: "Smart Speaker",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2021/02/10/12/36/hue-6001935_1280.jpg",
+      description: "Smart Light",
+    },
+    {
+      image_url:
+        "https://cdn.pixabay.com/photo/2017/08/30/08/34/robot-mower-2696318_1280.jpg",
+      description: "Smart Sprinkler",
     },
   ];

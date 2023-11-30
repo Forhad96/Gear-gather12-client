@@ -65,7 +65,7 @@ export default function Slider({images}) {
       >
         {images?.map((image, index) => (
           <SwiperSlide key={index}>
-            <img  src={image?.img_url} alt={`Slide ${index + 1}`} />
+            <img  src={image?.image_url} alt={`Slide ${index + 1}`} />
           </SwiperSlide>
         ))}
       </Swiper>

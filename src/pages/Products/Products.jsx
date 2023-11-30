@@ -104,11 +104,7 @@ const Products = () => {
           <div key={product?._id} className="card bg-white shadow-xl">
             <figure>
               {/* <img src={product?.image_url} alt={product?.name} /> */}
-              <img
-           
-                src="https://cdn.pixabay.com/photo/2023/11/21/10/12/tea-8402876_1280.png"
-                alt=""
-              />
+              <img className="h-[210px] w-full" src={product?.image_url} alt="" />
             </figure>
             <div className="card-body">
               <h2 className="card-title justify-between">
@@ -141,7 +137,6 @@ const Products = () => {
 
       <Pagination></Pagination>
       {/* extra components */}
-
     </div>
   );
 };
