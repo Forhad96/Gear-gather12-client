@@ -1,34 +1,24 @@
-import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { FaEdit, FaEye, FaPlus, FaTrash } from "react-icons/fa";
+import { Link, } from "react-router-dom";
 import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import Loader from "../../../shared/Loader/Loader";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
 import swal from "sweetalert";
 const Coupons = () => {
-  const { user } = useAuth();
+
   const axiosSecure = useAxiosSecure();
   const {
     data: coupons,
     isLoading,
     refetch,
   } = useGetSecure(`/coupons`, "coupons");
-  console.log(user?.email);
+  // console.log(user?.email);
 
-  if (isLoading) {
+  if (isLoading  ) {
     return <Loader></Loader>;
   }
-  console.log(coupons);
 
-  //  {
-  //       status: true,
-  //       _id: '65681ce1e119da623ec0f1a7',
-  //       couponCode: 'hurry',
-  //       expiryDate: '2023-12-08T00:00:00.000Z',
-  //       description: 'hurry up',
-  //       discountAmount: 50,
-  //       __v: 0
-  //     }
+
   const handleDelete = async (id) => {
     try {
       const willDelete = await swal({
@@ -39,8 +29,8 @@ const Coupons = () => {
         dangerMode: true,
       });
       if (willDelete) {
-        const res = await axiosSecure.delete(`/products/${id}`);
-        if (res.data.deletedCount > 0) {
+        const res = await axiosSecure.delete(`/coupons/${id}`);
+        if (res.status === 204) {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
@@ -55,9 +45,13 @@ const Coupons = () => {
   };
   return (
     <div>
-      <Link to="/dashboard/addCoupon" className="btn">
-        Add coupon
-      </Link>
+      <div className="card-actions justify-end">
+   
+        <Link to="/dashboard/addCoupon" className="btn btn-primary text-white">
+          <FaPlus className="h-5 w-5 text-white"></FaPlus>
+          Add coupon
+        </Link>
+      </div>
       <div className="overflow-x-auto h-[80vh]">
         <table className="table table-md">
           <thead>
@@ -79,16 +73,19 @@ const Coupons = () => {
                 <tr key={coupon._id}>
                   <th>{idx + 1}</th>
                   <td>{coupon?.couponCode}</td>
-                  <td>{coupon?.expiryDate}</td>
+                  <td>{new Date(coupon?.expiryDate).toLocaleString()}</td>
                   <td>{coupon?.description}</td>
+                  {/* {new Date(product?.created_at).toLocaleString()} */}
                   <td>{coupon?.discountAmount}</td>
-                  <td>{coupon?.status}</td>
+                  <td className="text-success">
+                    {coupon?.status ? "Active" : "Expired"}
+                  </td>
                   <td>
                     <Link
                       className="btn btn-sm"
                       to={`/dashboard/editCoupon/${coupon?._id}`}
                     >
-                      <FaEdit className="h-5 w-5 text-secondary"></FaEdit>
+                      <FaEdit className="h-5 w-5 text-primary"></FaEdit>
                     </Link>
                   </td>
 
@@ -97,7 +94,7 @@ const Coupons = () => {
                       className="btn btn-sm"
                       to={`/dashboard/CouponDetails/${coupon?._id}`}
                     >
-                      <FaEye className="h-5 w-5 text-secondary"></FaEye>
+                      <FaEye className="h-5 w-5 text-primary"></FaEye>
                     </Link>
                   </td>
                   <td>

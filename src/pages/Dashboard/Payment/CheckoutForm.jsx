@@ -7,8 +7,8 @@ import isCouponValid from "../../../utils/isCouponValid";
 import toast from "react-hot-toast";
 import useCheckRole from "../../../hooks/useCheckRole";
 
-const CheckOutForm = () => {
-  const {userInfo} = useCheckRole()
+const CheckOutForm = ({ refetch }) => {
+  const { userInfo } = useCheckRole();
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -23,7 +23,7 @@ const CheckOutForm = () => {
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", { price: price }).then((res) => {
-      console.log(res.data.clientSecret);
+      // console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
   }, [axiosSecure, price]);
@@ -73,11 +73,13 @@ const CheckOutForm = () => {
       } else {
         console.log("paymentIntent", paymentIntent);
         if (paymentIntent.status === "succeeded") {
-          const userId = userInfo?.userId
+          const userId = userInfo?.userId;
           const subscription = { subscription: "premium" };
-          console.log(paymentIntent.id);
+          // console.log(paymentIntent.id);
           setTransactionId(paymentIntent.id);
           const res = await axiosSecure.put(`users/${userId}`, subscription);
+          document.getElementById("my_modal_3").close();
+          refetch()
           console.log(res);
         }
       }
@@ -85,7 +87,6 @@ const CheckOutForm = () => {
       console.log(error);
     }
   };
-
 
   // handle for apply coupon
   const handleApplyCoupon = () => {
@@ -104,7 +105,6 @@ const CheckOutForm = () => {
 
           // Mark the coupon as applied
           setCouponApplied(true);
-
           toast.success("Successfully applied coupon");
           setError(null);
         }
@@ -190,4 +190,9 @@ const CheckOutForm = () => {
   );
 };
 
+import PropTypes from 'prop-types';
+
+CheckOutForm.propTypes = {
+  refetch: PropTypes.func.isRequired,
+};
 export default CheckOutForm;

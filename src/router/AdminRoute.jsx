@@ -8,14 +8,14 @@ const AdminRoute = ({children}) => {
     const {user,loading} = useAuth()
     const location = useLocation()
 
-    if(loading && isCheckRoleLoading){
+    if(loading || isCheckRoleLoading){
         return <Loader></Loader>
     }
 if (user && userInfo?.role === "admin" || userInfo?.role === "moderator"){
     return children;
 }
-//   return <Navigate to='/' state={location.pathname}></Navigate>
-return <Error></Error>
+  return <Navigate to='/login' state={location?.pathname}></Navigate>
+// return <Error></Error>
 };
 
 import PropTypes from 'prop-types';

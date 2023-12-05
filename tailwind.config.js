@@ -17,7 +17,7 @@ export default {
 
           neutral: "#121b13",
 
-          "base-100": "#e6ffff",
+          "base-100": "#E9FFFF",
 
           info: "#00b2d7",
 

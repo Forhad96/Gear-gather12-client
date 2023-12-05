@@ -63,27 +63,34 @@
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import SectionTitle from "../../../shared/SectionTitle/SectionTitle";
 
 const AddCoupon = () => {
+  const goTo = useNavigate()
   const [couponCode, setCouponCode] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [description, setDescription] = useState("");
   const [discountAmount, setDiscountAmount] = useState("");
   const [error, setError] = useState("");
   const axiosSecure = useAxiosSecure();
-  console.log(couponCode,expiryDate,description,discountAmount);
+  // console.log(couponCode,expiryDate,description,discountAmount);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const coupon = { couponCode, expiryDate, description, discountAmount };
     try {
       const response = await axiosSecure.post("/coupons",coupon);
-      toast.success("Operation successful");
-      console.log(response);
+      if(response.status === 201){
 
-      return response.data;
+        toast.success("Operation successful");
+        goTo('/dashboard/coupons')
+      } 
+
+      // return response.data;
     } catch (error) {
       toast.error(error);
+      setError(error)
       throw error;
     }
   };
@@ -94,6 +101,7 @@ const AddCoupon = () => {
         className="max-w-md mx-auto p-6  bg-white rounded-lg shadow-md"
         onSubmit={handleSubmit}
       >
+        <SectionTitle title='Create Coupon'></SectionTitle>
         <div className="mb-4">
           <label
             htmlFor="couponCode"
@@ -167,7 +175,7 @@ const AddCoupon = () => {
             type="submit"
             className="btn btn-primary text-white font-bold"
           >
-            Add Coupon
+           Create
           </button>
         </div>
 

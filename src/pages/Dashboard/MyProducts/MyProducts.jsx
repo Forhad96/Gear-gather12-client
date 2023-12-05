@@ -13,7 +13,6 @@ const MyProducts = () => {
     `/userProducts/${user?.email}`,
     "userProducts"
   );
-  console.log(user?.email);
 
   if (isLoading) {
     return <Loader></Loader>;

@@ -21,6 +21,9 @@ import ViewReports from "../pages/Dashboard/ManageReports/ViewReports";
 import AdminRoute from "./AdminRoute";
 import Coupons from "../pages/Dashboard/Coupons/Coupons";
 import AddCoupon from "../pages/Dashboard/Coupons/AddCoupon";
+import EditCoupon from "../pages/Dashboard/Coupons/EditCoupon";
+import CouponDetails from "../pages/Dashboard/Coupons/CouponDetails";
+
 
 const route = createBrowserRouter([
   {
@@ -133,14 +136,27 @@ const route = createBrowserRouter([
         ),
       },
       {
-        path: " addCoupon",
+        path: "addCoupon",
         element: (
           <AdminRoute>
             <AddCoupon></AddCoupon>
           </AdminRoute>
         ),
       },
+      {
+        path: "editCoupon/:id",
+        element: (
+          <AdminRoute>
+            <EditCoupon></EditCoupon>
+          </AdminRoute>
+        ),
+      },
+      {
+        path:'couponDetails/:id',
+        element:<AdminRoute><CouponDetails></CouponDetails></AdminRoute>
+      }
     ],
   },
+
 ]);
 export default route;

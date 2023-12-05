@@ -13,19 +13,20 @@ const imageUpload = async (photo) => {
     imageFormData.append("image", photo);
 
     // Upload image to ImageBB
-    if(photo?.name){
+    // if(photo?.name){
 
-      const imageUploadResponse = await axios.post(
-        image_hosting_api,
-        imageFormData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return imageUploadResponse.data.data.url;
-    }
+
+    // }
+          const imageUploadResponse = await axios.post(
+            image_hosting_api,
+            imageFormData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          return imageUploadResponse.data.data.url;
   } catch (error) {
     console.log(error);
   }

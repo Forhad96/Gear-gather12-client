@@ -23,7 +23,7 @@ const Products = () => {
     "verifiedProducts",
     searchValue
   );
-  console.log(userInfo.userId);
+  // console.log(userInfo.userId);
 
   useEffect(() => {
     setProducts(data);
@@ -104,16 +104,23 @@ const Products = () => {
           <div key={product?._id} className="card bg-white shadow-xl">
             <figure>
               {/* <img src={product?.image_url} alt={product?.name} /> */}
-              <img className="h-[210px] w-full" src={product?.image_url} alt="" />
+              <img
+                className="h-[210px] w-full object-cover"
+                src={product?.image_url}
+                alt=""
+              />
             </figure>
             <div className="card-body">
               <h2 className="card-title justify-between">
                 {product?.name}
-                <div className="badge badge-primary text-white">NEW</div>
+                <div className="badge badge-primary text-white">
+                  {product?.rating}
+                </div>
               </h2>
 
               <p>
-                Publish Date:{new Date(product?.created_at).toLocaleString()}
+                <span className="font-medium">Publish :</span>
+                {new Date(product?.created_at).toLocaleString()}
               </p>
               <div className="card-actions flex-1 items-center">
                 <span className="font-medium">Tags:</span>

@@ -3,11 +3,15 @@ import useAuth from "../../hooks/useAuth";
 import ReactStarsRating from "react-awesome-stars-rating";
 import useAxiosSecure from "../../hooks/axiosSecureApi/useAxiosSecure";
 import toast from "react-hot-toast";
-const AddReview = ({ productId, refetch }) => {
+const AddReview = ({ productId, product_owner, refetch }) => {
   const { user } = useAuth();
+
   const axiosSecure = useAxiosSecure();
   const [rating, setRating] = useState(0);
+
+
   // {author, email;productId;createdAt;rating;profession;}
+
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
@@ -21,10 +25,14 @@ const AddReview = ({ productId, refetch }) => {
         rating,
       };
       // sent ratings to store database
-      const res = await axiosSecure.post("/reviews", review);
-      if (res.data.success) {
-        toast.success("successfully posted review");
-        refetch()
+      if (comment && rating) {
+        const res = await axiosSecure.post("/reviews", review);
+        if (res.data.success) {
+          toast.success("successfully posted review");
+          refetch();
+        }
+      } else {
+        toast.error("Please write your review and select rating");
       }
     } catch (error) {
       console.log(error);
@@ -65,8 +73,11 @@ const AddReview = ({ productId, refetch }) => {
                 defaultValue={""}
                 name="comment"
               />
-              <button className="my-8 rounded-xl bg-gradient-to-r from-primary to-secondary hover:opacity-90 py-3 text-base text-white">
-                Rate now
+              <button
+          
+                className="my-8 btn btn-primary disabled:btn-neutral disabled:text-gray-400 disabled:cursor-not-allowed text-white"
+              >
+                Rate Now
               </button>
             </div>
           </form>
@@ -81,9 +92,11 @@ const AddReview = ({ productId, refetch }) => {
   );
 };
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 AddReview.propTypes = {
   productId: PropTypes.string,
+  refetch: PropTypes.func,
+  product_owner: PropTypes.string,
 };
 export default AddReview;

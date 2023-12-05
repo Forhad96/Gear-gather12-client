@@ -8,9 +8,11 @@ const Dashboard = () => {
       {/* component */}
       <div className="min-h-screen bg-gray-50/50">
         {/* aside bar left */}
+
         <Aside></Aside>
         {/* outlet right site with nav bar */}
         <div className="p-4 xl:ml-80">
+          
           <Navbar></Navbar>
           {/* outlet content */}
           <Outlet></Outlet>
@@ -41,28 +43,22 @@ const Dashboard = () => {
                 <ul className="flex items-center gap-4">
                   <li>
                     <Link
-                     to='/'
+                      to="/"
                       className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
-                    
                     >
                       Home
                     </Link>
                   </li>
                   <li>
                     <Link
-                        to='/products'
+                      to="/products"
                       className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
-                      
                     >
                       Products
                     </Link>
                   </li>
                   <li>
-                    <Link
-              
-                      className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
-                    
-                    >
+                    <Link className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500">
                       Contact us
                     </Link>
                   </li>

@@ -3,7 +3,7 @@ import useGetPublicData from "../../hooks/axiosPublicApi/useGetPublicData";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
 import VoteButton from "../../shared/VoteButton/VoteButton";
-
+import ReactStarsRating from "react-awesome-stars-rating";
 const FeaturedProduct = () => {
   const [sort, setSort] = useState("");
   const { data: products, refetch } = useGetPublicData(
@@ -65,7 +65,11 @@ const FeaturedProduct = () => {
               <article key={product?._id} className="relative">
                 <figure>
                   {/* <img src={product?.image_url} alt={product?.name} /> */}
-                  <img className="h-[210px] w-full" src={product?.image_url} alt="" />
+                  <img
+                    className="h-[210px] w-full object-cover"
+                    src={product?.image_url}
+                    alt=""
+                  />
                 </figure>
                 <div className="absolute top-0 m-1 rounded-full bg-white">
                   <p className="text-[10px] rounded-full bg-primary p-1 font-bold uppercase tracking-wide text-white sm:px-3 sm:py-1">
@@ -81,61 +85,12 @@ const FeaturedProduct = () => {
                       </a>
                     </h3>
                     <div className="mt-2 flex items-center">
-                      <svg
-                        className="block h-3 w-3 align-middle text-black sm:h-4 sm:w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                          className=""
-                        />
-                      </svg>
-                      <svg
-                        className="block h-3 w-3 align-middle text-black sm:h-4 sm:w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                          className=""
-                        />
-                      </svg>
-                      <svg
-                        className="block h-3 w-3 align-middle text-black sm:h-4 sm:w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                          className=""
-                        />
-                      </svg>
-                      <svg
-                        className="block h-3 w-3 align-middle text-black sm:h-4 sm:w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                          className=""
-                        />
-                      </svg>
-                      <svg
-                        className="block h-3 w-3 align-middle text-gray-400 sm:h-4 sm:w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                          className=""
-                        />
-                      </svg>
+                      <ReactStarsRating
+                        size={20}
+                        className="flex me-2"
+                        isEdit={false}
+                        value={product?.rating}
+                      ></ReactStarsRating>
                     </div>
                   </div>
                   <div className="text-right">

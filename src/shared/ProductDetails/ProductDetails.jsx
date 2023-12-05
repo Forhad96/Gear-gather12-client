@@ -7,14 +7,16 @@ import { useEffect, useState } from "react";
 import VoteButton from "../VoteButton/VoteButton";
 import Slider from "../Slider/Slider";
 import Review from "../../components/Reviews/Review";
+import Loader from "../Loader/Loader";
+import { SwiperSlide } from "swiper/react";
 
 
 const ProductDetails = () => {
   const {userInfo} = useCheckRole()
   const { id } = useParams();
   const [disabled,setDisable] = useState(false)
-  const { data: product,refetch } = useGetSecure(`/products/${id}`, "singleProduct");
-console.log(product.tags);
+  const { data: product,refetch,isLoading } = useGetSecure(`/products/${id}`, "singleProduct");
+  const {data:reviewCount} = useGetSecure(`/reviewCount/${id}`,"reviewCount")
 useEffect(()=>{
   if (
     userInfo?.role === "admin" ||
@@ -24,6 +26,11 @@ useEffect(()=>{
     setDisable(true);
   }
 },[userInfo,product])
+
+
+if(isLoading){
+  return <Loader></Loader>
+}
   return (
     <div className="p-4">
       {/* Product Details Section */}
@@ -67,12 +74,21 @@ useEffect(()=>{
                       src="https://cdn.pixabay.com/photo/2023/09/19/11/01/beach-8262340_1280.jpg"
                       alt=""
                     /> */}
-                    <Slider images={images}></Slider>
+                    <Slider images={images}>
+                      {images?.map((image, index) => (
+                        <SwiperSlide className="relative" key={index}>
+                          <img
+                            src={image?.image_url}
+                            alt={`Slide ${index + 1}`}
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Slider>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
+            <div className="lg:col-span-3 bg-white p-6 rounded-lg lg:row-span-2 lg:row-end-2">
               <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">
                 {product?.name}
               </h1>
@@ -135,7 +151,7 @@ useEffect(()=>{
                   </svg>
                 </div>
                 <p className="ml-2 text-sm font-medium text-gray-500">
-                  12 Reviews
+                  {reviewCount} Reviews
                 </p>
               </div>
 
@@ -143,7 +159,7 @@ useEffect(()=>{
               <p className="text-gray-700 mb-4">{product?.description}</p>
               <h2 className="mt-8 text-base text-gray-900">Tags:</h2>
               <div className="mt-3 flex select-none flex-wrap items-center gap-1">
-                {product?.tags.map((tag, index) => (
+                {product?.tags?.map((tag, index) => (
                   <label key={index} className="">
                     <input
                       type="radio"
@@ -200,8 +216,10 @@ useEffect(()=>{
               </div>
               <div className="mt-0  flow-root sm:mt-12">
                 <div className="flex items-center justify-center">
-                  <Review productId={product?._id}></Review>
-                
+                  <Review
+                    productId={product?._id}
+                    product_owner={product?.product_owner}
+                  ></Review>
                 </div>
               </div>
             </div>

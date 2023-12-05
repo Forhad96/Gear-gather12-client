@@ -1,24 +1,29 @@
 import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure";
 import useAuth from "../../../hooks/useAuth";
-import useCheckRole from "../../../hooks/useCheckRole";
+import Loader from "../../../shared/Loader/Loader";
 import Modal from "../../../shared/Modal/Modal";
 import Payment from "../Payment/Payment";
 
 const Profile = () => {
   const {user} = useAuth()
-  const {userInfo} = useCheckRole()
+
+  const {data,isLoading,refetch} =useGetSecure(`/users/checkRole/${user?.email}`,'roleInfo')
+  const subscription = data?.subscription;
+  // console.log(subscription);
+  if(isLoading){
+    return <Loader></Loader>
+  }
   
 
     return (
       <div className="m-10 max-w-sm mx-auto h-[70vh]">
         <div className=" rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
-          <div className="relative mx-auto w-36 rounded-full">
-            <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2" />
-            <img
-              className="mx-auto h-auto w-full rounded-full"
-              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-              alt=""
-            />
+          <div className="flex items-center justify-center">
+            <div className="avatar online ">
+              <div className="w-24 rounded-full">
+                <img src={user?.photURL} />
+              </div>
+            </div>
           </div>
           <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-900">
             {user?.displayName}
@@ -35,7 +40,9 @@ const Profile = () => {
               <span>Status</span>
               <span className="ml-auto">
                 <span className="rounded-full bg-green-200 py-1 px-2 text-xs font-medium text-green-700">
-                  {userInfo?.subscription === "premium"? 'Verified':'Normal user'}
+                  {subscription === "premium"
+                    ? "Verified"
+                    : "Normal user"}
                 </span>
               </span>
             </li>
@@ -46,7 +53,7 @@ const Profile = () => {
           </ul>
           {/* subscription button */}
           <div className="text-center mt-6">
-            {userInfo?.subscription === "free" && (
+            {subscription === "free" && (
               <button
                 onClick={() =>
                   document.getElementById("my_modal_3").showModal()
@@ -57,7 +64,7 @@ const Profile = () => {
               </button>
             )}
             <Modal>
-              <Payment></Payment>
+              <Payment refetch={refetch}></Payment>
             </Modal>
           </div>
         </div>

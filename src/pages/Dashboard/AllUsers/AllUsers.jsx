@@ -10,14 +10,15 @@ const {data:users,refetch} = useGetSecure('/users','manageUsers') //this hook ge
 
 
     const handleRoleUpdate = async (id,role)=>{
-      console.log(id,role);
+      // console.log(id,role);
       try {
         const res = await axiosSecure.put(`/users/${id}`,{"role":role})
-        if(res.data.result.modifiedCount > 0){
+        // console.log(res.data.success);
+        if(res.data.success){
           toast.success('User role update successful')
           refetch()
         }
-        console.log(res);
+        // console.log(res);
       } catch (error) {
         console.log(error);
         

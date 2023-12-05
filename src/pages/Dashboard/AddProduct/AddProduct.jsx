@@ -4,11 +4,20 @@ import useAuth from "../../../hooks/useAuth";
 import imageUpload from "../../../utils/imageUpload.js";
 import useAxiosSecure from "../../../hooks/axiosSecureApi/useAxiosSecure.jsx";
 import toast from "react-hot-toast";
+import useGetSecure from "../../../hooks/axiosSecureApi/useGetSecure.jsx";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../../shared/Loader/Loader.jsx";
 
 const AddProduct = () => {
   const { user } = useAuth();
+  const goTo = useNavigate()
   const axiosSecure = useAxiosSecure();
   const [tags, setTags] = useState([]);
+const { data: premiumInfo,isLoading } = useGetSecure(`/premium_info`,'premiumInfo');
+
+if(isLoading){
+  return <Loader></Loader>
+}
 
   const handleSubmit = async (e) => {
     try {
@@ -22,6 +31,15 @@ const AddProduct = () => {
         category,
         externalLinks,
       } = Object.fromEntries(allInputData);
+
+
+      if (premiumInfo.count === 1 && premiumInfo.subscription === "free") {
+
+        toast.error("Without subscription you can add only one product! Please Subscribe");
+        goTo('/dashboard/profile')
+        return
+        
+      }
       const imageUploadResponse = await imageUpload(image_url);
       if (imageUploadResponse) {
         const product = {
