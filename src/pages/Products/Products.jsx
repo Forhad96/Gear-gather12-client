@@ -9,22 +9,23 @@ import useCheckRole from "../../hooks/useCheckRole";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import Pagination from "../../shared/Pagination/Pagination";
 import VoteButton from "../../shared/VoteButton/VoteButton";
+import usePagination from "../../hooks/usePagination";
 const Products = () => {
-  const { user } = useAuth();
+
   const goTo = useNavigate();
-  const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
+const { totalPages, currentPage, setCurrentPage, perPage, setPerPage } = usePagination();
+
+
 
   const [products, setProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const { userInfo } = useCheckRole();
   const { data, isLoading, refetch } = useGetPublicData(
-    "/verifiedProducts",
+    `/verifiedProducts/?searchValue=${searchValue}&page=${currentPage}&size=${perPage}`,
     "verifiedProducts",
     searchValue
   );
-  // console.log(userInfo.userId);
 
+  
   useEffect(() => {
     setProducts(data);
   }, [data]);
@@ -33,12 +34,18 @@ const Products = () => {
     return <Loader></Loader>;
   }
   // console.log(userInfo);
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
     try {
-      const res = await axiosPublic(
-        `/verifiedProducts/?searchValue=${searchValue}`
-      );
-      setProducts(res.data);
+      // const res = await axiosPublic(
+      //   `/verifiedProducts/?searchValue=${searchValue}`
+      // );
+      // setProducts(res.data);
+
+      e.preventDefault();
+      const searchText = e.target.search.value;
+      setSearchValue(searchText);
+      refetch();
+      console.log(searchText);
     } catch (error) {
       console.log(error);
     }
@@ -70,32 +77,29 @@ const Products = () => {
       <SectionTitle title={"All Products"}></SectionTitle>
       {/* product search bar */}
       <div className="text-center">
-        <div className="join my-10">
-          <div>
-            <div>
-              <input
-                className="input input-bordered join-item"
-                placeholder="Search"
-                onBlur={(e) => setSearchValue(e.target.value)}
-              />
-            </div>
-          </div>
-          {/* <select className="select select-bordered join-item">
+        <form onSubmit={handleSearch} className="join my-10">
+          <input
+            className="input input-bordered join-item"
+            placeholder="Search"
+            // onBlur={(e) => setSearchValue(e.target.value)}
+            name="search"
+          />
+          <select className="select select-bordered join-item">
             <option disabled>Filter</option>
             <option>Sci-fi</option>
             <option>Drama</option>
             <option>Action</option>
-          </select> */}
+          </select>
           <div className="indicator">
             {/* <span className="indicator-item badge badge-secondary">new</span> */}
             <button
-              onClick={handleSearch}
+              type="submit"
               className="btn btn-primary text-white join-item"
             >
               Search
             </button>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* product card */}
@@ -142,7 +146,12 @@ const Products = () => {
         ))}
       </div>
 
-      <Pagination></Pagination>
+      <Pagination
+        totalPages={totalPages.totalPage}
+        currentPage={currentPage}
+        refetch={refetch}
+        setCurrentPage={setCurrentPage}
+      ></Pagination>
       {/* extra components */}
     </div>
   );

@@ -1,8 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-const Pagination = () => {
-  const totalPages = 23; // total number of pages
-  const [currentPage, setCurrentPage] = useState(9); //  initial page
+const Pagination = ({totalPages,currentPage,setCurrentPage,refetch}) => {
+
 
   const generatePageLinks = () => {
     const pageLinks = [];
@@ -86,6 +85,7 @@ const Pagination = () => {
 
   const changePage = (newPage) => {
     setCurrentPage(newPage);
+    refetch()
     // Add logic to fetch and display content for the new page
   };
 

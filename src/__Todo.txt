@@ -72,12 +72,13 @@
 -create api for coupon save database
 -create api for get coupon 
 -create api for delete coupon
--todo: create table for display available coupon
- 
+-*todo: create table for display available coupon
 
 
 
--todo:product pagination-
+-todo: update update api for doing pagination
+-todo:implement pagination
 
+-todo:implement sort by vote count on product page 
 
 
